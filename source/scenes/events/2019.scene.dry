@@ -1,0 +1,13 @@
+title: 1929
+subtitle: A new year
+on-arrival: {!
+// see post_event.scene.dry for changes.
+Q.economic_growth += 4;
+
+!}
+tags: event
+view-if: year = 2019 and month = 1
+priority: 2
+max-visits: 1
+
+A new year begins. The economy is doing well, to the detriment of our ability to criticize the present administration. We must hope for nothing short of a catastrophe within this year or the next to weaken the Republican base. Maybe a nice scandal... or virus... or recession...
