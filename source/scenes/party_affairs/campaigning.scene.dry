@@ -24,7 +24,7 @@ Whether or not we are in an electoral campaign, the party is always trying to br
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
-on-arrival: west_coast_spd += 6*(1-dissent);
+on-arrival: west_coast_dem += 6*(1-dissent);
 
 We have increased our campaigning in the West Coast. 
 
@@ -32,25 +32,23 @@ We have increased our campaigning in the West Coast.
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
-on-arrival: new_middle_spd += 6*(1-dissent); new_middle_spd -= 4 if socialism <= 49 and peoples_party == 0; resources -= 1; peoples_party_support += 1;
+on-arrival: south_dem += 6*(1-dissent); south_dem += 2 if liberalism <= 44; resources -= 1;
 
-We have increased our campaigning among the new middle class. [? if socialism <= 49 and peoples_party == 0: The popular antipathy towards socialism among this group makes our campaign more difficult. ?] [? if peoples_party > 0: As a people's party, we have an easier time increasing support among the middle class than before. ?]
-
-@old_middle
+We have increased our campaigning in the Southern States. [? if liberalism <= 44: The popular antipathy towards liberalism among the population of the South makes our campaign more difficult. ?] 
+@rust_belt
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
-on-arrival: old_middle_spd += 5*(1-dissent); resources -= 1; old_middle_spd -= 3 if nationalism >= 51 and peoples_party == 0; peoples_party_support += 1
+on-arrival: rust_belt_dem += 5*(1-dissent); resources -= 1; rust_belt_dem += 2 if populism >= 65; progressive_party_support -= 1
 
-We have increased our campaigning among the old middle class. [? if nationalism >= 51 and peoples_party == 0: The high levels of nationalism among this group make our campaign more difficult. ?] [? if peoples_party > 0: As a people's party, we have an easier time increasing support among the middle class than before. ?]
-
-@rural
+We have increased our campaigning in the rust belt states. [? if populism >= 55; The high levels of populism among the wokring class and lower-income classes makes our campaign more difficult. How can we appeal to them if they do not want to be appealed to? ?] 
+@great_plains
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
-on-arrival: rural_spd += 5*(1-dissent); rural_spd -= 3*(1-dissent) if peoples_party == 0; resources -= 1; peoples_party_support += 1; rural_spd += 3*(1-dissent) if rural_policy >= 2
+on-arrival: great_plains_dem += 1*(1-dissent); progressive_party_support -= 1; rural_spd += 3*(1-dissent) if rural_policy >= 2
 
-We have increased our campaigning among farmers. [? if peoples_party == 0: We have not historically campaigned much among the farmers, and they do not trust us. ?][? if peoples_party > 0: As a people's party, we have an easier time increasing support among farmers than before. ?][? if rural_policy >= 2 : Our rural policies have made it easier for us to build support among farmers. ?]
+We have increased our campaigning among farmers in the Great Plains. [? if peoples_party == 0: We have not historically campaigned much among the farmers, and they do not trust us. ?][? if peoples_party > 0: As a people's party, we have an easier time increasing support among farmers than before. ?][? if rural_policy >= 2 : Our rural policies have made it easier for us to build support among farmers. ?]
 
 @unemployed
 subtitle: -1 resources
