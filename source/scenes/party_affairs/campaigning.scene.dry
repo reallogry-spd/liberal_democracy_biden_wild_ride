@@ -26,24 +26,27 @@ choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
 
 We have increased our campaigning in the West Coast. 
+
 @south
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
 
-We have increased our campaigning in the Southern States. [? if liberalism <= 44: The popular antipathy towards liberalism among the population of the South makes our campaign more difficult. ?] 
+We have increased our campaigning in the Southern States. 
+
 @rust_belt
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
 
-We have increased our campaigning in the rust belt states. [? if populism >= 55; The high levels of populism among the wokring class and lower-income classes makes our campaign more difficult. How can we appeal to them if they do not want to be appealed to? ?] 
+We have increased our campaigning in the rust belt states. 
+
 @great_plains
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
 
-We have increased our campaigning among farmers in the Great Plains. [? if peoples_party == 0: We have not historically campaigned much among the farmers, and they do not trust us. ?][? if peoples_party > 0: As a people's party, we have an easier time increasing support among farmers than before. ?][? if rural_policy >= 2 : Our rural policies have made it easier for us to build support among farmers. ?]
+We have increased our campaigning among farmers in the Great Plains.
 
 @northeast
 subtitle: -1 resources
