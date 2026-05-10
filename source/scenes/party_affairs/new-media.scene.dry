@@ -1,0 +1,39 @@
+title: A New Outlook on Leftist Media?
+new-page: true
+is-card: true
+tags: party_affairs
+view-if: year >= 2019; new_media != 1
+on-arrival: month_actions += 1; new_media = 1
+card-image: mpu.jpg
+
+= A New Outlook on Leftist Media?
+
+Many within our Party have begun suggesting that the Democrats take a more active role in interacting with the media. The question is: is it worth it?
+
+- @yes
+- @no
+- @abstain
+- @easy_discard
+
+@yes
+title: Yes.
+subtitle: We can't pass up this opportunity to expand our voter base. It is time for a change in course regarding the media!
+
+The question remains, however: How *shall* our course be changed? We have a variety of options for our new media strategy.
+
+- @wip_1: Option 1
+- @wip_2: Option 2
+- @wip_3: Option 3
+
+@no
+title: No.
+subtitle: The risks outweigh the benefit. We will continue to simply hold trust that certain media sources will always be on our side.
+
+We have decided not to adjust our media strategy. This was the safer move, but it may have sacrificed a marvelous opportunity.
+
+@abstain
+title: We will delay making a decision for now.
+subtitle: We must wait and see which way the wind will blow.
+on-arrival: new_media = 0
+
+What if we back the wrong horse? We must wait for it.
