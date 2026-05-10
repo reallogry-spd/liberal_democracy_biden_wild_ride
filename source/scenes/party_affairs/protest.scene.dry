@@ -20,12 +20,12 @@ Mass protests are a common feature of the modern Democratic Party, especially in
 - @easy_discard
 
 @affordability
-on-arrival: workers_spd += 4*(1-dissent);
+on-arrival: workers_spd += 3*(1-dissent);
 
 The working class appreciate our appeal to the need for lower costs, although many question our plans for obtaining them.
 
 @welfare
-on-arrival: workers_spd += 3*(1-dissent);
+on-arrival: workers_spd += 4*(1-dissent);
 
 Our support for greater welfare resonates well with those affected by economic inequality, while possibly alienating the financially stable.
 
@@ -46,7 +46,7 @@ Our speakers rail hard against fossil fuels and, specifically, large corporation
 view-if: wtb_adopted = 1
 choose-if: return_to_normalcy = 0
 unavailable-subtitle: Though we are not currently the ones running the government, the current administration is hardly Populist in the sense of the Trump Administration.
-on-arrival: workers_spd += 6*(1-dissent);
+on-arrival: workers_spd += 5*(1-dissent);
 
 We criticize the current Populist administration harshly, calling on our supporters to defend their rights and support the Party in the next elections.
 
