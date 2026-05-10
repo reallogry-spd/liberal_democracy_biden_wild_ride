@@ -1,0 +1,60 @@
+title: Political Protest
+new-page: true
+is-card: true
+tags: party_affairs
+view-if: protest_timer <= 0
+on-arrival: month_actions += 1; protest_timer = 6
+card-image: protest222.jpg
+go-to: main_protest
+
+@main_protest
+
+Mass protests are a common feature of the modern Democratic Party, especially in opposition or support to the current administration. What is the primary theme of this protest?
+
+- @affordability: Improving affordability for working-class Americans and Middle Class.
+- @welfare: The implementation and elaboration of a strong American welfare state.
+- @liberalism: We will emphasize the core tenets of neoliberalism — diplomacy, democracy, and defending personal freedoms.
+- @environmentalism: Attacking fossil fuels and demanding the implementation of a "Green New Deal" program to curb climate change.
+- @opposing_gop: Our protets will rail hard against the current Populist administration gripping Washington.
+- @generic: What's wrong with our generic messaging? Everyone loves a good, compromising message, don't they?
+- @easy_discard
+
+@affordability
+on-arrival: workers_spd += 4*(1-dissent);
+
+The working class appreciate our appeal to the need for lower costs, although many question our plans for obtaining them.
+
+@welfare
+on-arrival: workers_spd += 3*(1-dissent);
+
+Our support for greater welfare resonates well with those affected by economic inequality, while possibly alienating the financially stable.
+
+@liberalism
+on-arrival: democratization += 1; pro_republic += 2*(1 - dissent); workers_spd += 4*(1-dissent) if democratization >= 3; unemployed_spd += 3*(1-dissent) if democratization >= 3; pro_republic += 4*(1 - dissent) if democratization >= 3; new_middle_spd += 4*(1-dissent) if democratization >= 3 
+
+Our speakers defend the republican system and rail against the monarchists and authoritarians who threaten it.
+
+[? if democratization < 3 : Talk of liberalism does not resonate as well with our base as we may like. However, maybe they can be convinced. ?]
+[? if democratization >= 3 : Since we have consistently made liberalism a theme of our campaign, our party supporters are enthusiastic about our message. ?]
+
+@environmentalism
+on-arrival: workers_spd += 4*(1 - dissent)
+
+Our speakers rail hard against fossil fuels and, specifically, large corporations polluting the environment. They call for the Green New Deal to create jobs and reduce our dependence on fossil fuels.
+
+[? if pacifism < 3 : Given our society's dependence on fossil fuels, it is difficult to argue so vehemently in favor of the environment. ?]
+[? if pacifism >= 3 : Since we have consistently made environmentalism a theme of our campaign, our party supporters are enthusiastic about our message. ?]
+
+@opposing_gop
+view-if: wtb_adopted = 1
+choose-if: return_to_normalcy = 0
+unavailable-subtitle: Though we are not currently the ones running the government, the current administration is hardly Populist in the sense of the Trump Administration.
+on-arrival: workers_spd += 6*(1-dissent);
+
+We criticize the current Populist administration harshly, calling on our supporters to defend their rights and support the Party in the next elections.
+
+
+@generic
+on-arrival: workers_spd += 2*(1-dissent);
+
+Our speakers have made basic points about the value of democracy and rights. Our supporters agree, but they are somewhat bored.
