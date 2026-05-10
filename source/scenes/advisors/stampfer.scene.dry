@@ -9,20 +9,9 @@ new-page: true
 
 Friedrich Stampfer is the long-time editor-in-chief of Vorwärts, our party newspaper, and also a Reichstag member. He was historically part of the Majority SPD that supported our participation in the Great War, but also supports cooperation with the KPD to save the Republic.
 
-- @media_
 - @faction_support_
 - @kpd_cooperation
 - @root: Return to main
-
-
-@media_
-title: Media
-subtitle: Manage our party's newspapers and media.
-choose-if: advisor_action_timer = 0
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
-on-arrival: advisor_action_timer = 6; media_timer -= 6; last_advisor_action = 1
-go-to: media
-
 
 @faction_support_
 title: Editorial Line
