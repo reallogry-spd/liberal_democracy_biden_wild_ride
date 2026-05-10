@@ -14,30 +14,50 @@ In our media and campaign materials, how should we go about criticizing the Repu
 - @hate: The hate practiced by many within the Republican Party can not go unanswered. We will rail hard against the racism and bigotry running rampant within the Conservative movement.
 - @leadership: We will criticize the current Republican leadership for being incompetent and moronic.
 - @policy: We will criticize some of the GOP's more specific policies.
-- @economy: The bourgeois parties - the Center and DVP.
+- @economy: Our Party will attack the GOP's support for billionaires and the ultra-ric; it is time to reclaim our status as the party of the working class.
 - @easy_discard
 
 @anti_dem
 on-arrival: workers_spd += 4
 
-Attacking the far right and left is popular among all but the left wing of our party, who would prefer to be fighting the bourgeois parties. This might also hamper our ability to reconcile with the KPD in the future.
+Attacking the anti-democratic and obviously Populist excesses of the GOP is popular with many of our core party supporters, and helps to deteriorate their national image amongst the middle class and educated voters.
 
-@far_right
-on-arrival: enemies = "far right"; left_strength += 5; left_dissent -= 5; workers_nsdap -= 3; workers_dnvp -= 3;
+[? if democratization < 2 : However, although we make good points, it seems many outside of our party supporters do not really care much about whether or not the ruling party supports democracy. ?]
 
-Attacking the far right is popular among the entire party, although the left considers the bourgeois parties to be just as dangerous, while the right is critical of our lack of response to the KPD. Our bourgeois coalition partners are also skeptical of our lack of commitment to anti-communism.
+@hate
+on-arrival: workers_spd += 4
 
-@nsdap
-on-arrival: enemies = "NSDAP"; neorevisionist_strength += 5; nazi_urgency += 1; workers_nsdap -= 4;
+Criticizing bigotry is popular with the Youth and Progressives, however many committed conservatives do not care much whether or not the Republicans are hateful; many of them are hateful themselves.
 
-[? if nazi_urgency == 0 or nsdap_r < 10 : The NSDAP is a tiny party right now, with more bark than bite. Many in our party are questioning our choices. ?][? if nazi_urgency > 0 and nsdap_r >= 10 : The Nazis are the most urgent problem for us to deal with. ?]
+@leadership
+on-arrival: workers_spd +=4
 
-@kpd
-on-arrival: enemies = "KPD"; reformist_strength += 5; left_dissent += 8; reformist_dissent -= 5; kpd_relation -= 15; dvp_relation += 5; z_relation += 5; workers_kpd -= 4;
+We attack the Republican leadership for being incompetent, docile, and uninformed.
 
-Attacking the KPD is supported by all but the most left-wing socialists, and wins us some measure of approval among the bourgeois parties. However, If we are to reconcile with the KPD, this may not be the best choice.
+@policy
 
-@bourgeois
-on-arrival: enemies = "bourgeois parties"; left_strength += 8; left_dissent -= 5; dvp_relation -= 5; z_relation -= 5; kpd_relation += 5; reformist_dissent += 8; workers_z -= 3; coalition_dissent += 1
+Which policy will we focus on criticizing?
 
-Our anti-bourgeois rhetoric is popular among the left, but may make it harder to build the coalitions that are necessary for government in the future.
+- @gun_rights: The Republican Party's incessant support for gun rights and the 2nd Amendment. What "right" is it to kill people?
+- @tax_cuts: The GOP promises tax cuts for the upper brackets, and it claims that the average person will reap the benefits. Where are the benefits?
+- @military_spending: Surely no American really supports even more funding to the military to be wrapped up in endless wars. We will attack the GOP's support of military spending!
+
+@economy
+on-arrival: workers_spd += 5
+
+We tear apart the Republican tax cut and non-intervention policy, calling for accountability for the upper class and support for the workers and middle class.
+
+@gun_rights
+on-arrival: workers_spd += 4
+
+Our support for gun regulations is popular in the West and Northeast, while alienating moderates in the South and Great Plains.
+
+@tax_cuts
+on-arrival: workers_spd += 5
+
+Workers and urban voters rally around more taxes for the wealthy, while some upper middle class and priveleged voters may be disturbed by our divergence from neoliberalism.
+
+@military_spending
+on-arrival: workers_spd += 5
+
+Our call for decreased military spending is popular among the less fortunate, however interventionists are shock by our endorsement of pacifism.
