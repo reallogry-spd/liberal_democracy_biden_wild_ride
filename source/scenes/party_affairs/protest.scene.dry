@@ -42,9 +42,6 @@ on-arrival: workers_spd += 4*(1 - dissent)
 
 Our speakers rail hard against fossil fuels and, specifically, large corporations polluting the environment. They call for the Green New Deal to create jobs and reduce our dependence on fossil fuels.
 
-[? if pacifism < 3 : Given our society's dependence on fossil fuels, it is difficult to argue so vehemently in favor of the environment. ?]
-[? if pacifism >= 3 : Since we have consistently made environmentalism a theme of our campaign, our party supporters are enthusiastic about our message. ?]
-
 @opposing_gop
 view-if: wtb_adopted = 1
 choose-if: return_to_normalcy = 0
