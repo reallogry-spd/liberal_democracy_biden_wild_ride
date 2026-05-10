@@ -52,6 +52,6 @@ We criticize the current Populist administration harshly, calling on our support
 
 
 @generic
-on-arrival: workers_spd += 2*(1-dissent);
+on-arrival: workers_spd += 1*(1-dissent);
 
 Our speakers have made basic points about the value of democracy and rights. Our supporters agree, but they are somewhat bored.
