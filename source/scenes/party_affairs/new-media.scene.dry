@@ -2,7 +2,7 @@ title: A New Outlook on Leftist Media?
 new-page: true
 is-card: true
 tags: party_affairs
-view-if: year >= 2019; new_media != 1
+view-if: year >= 2019; new_media = 0
 on-arrival: month_actions += 1; new_media = 1
 card-image: mpu.jpg
 
