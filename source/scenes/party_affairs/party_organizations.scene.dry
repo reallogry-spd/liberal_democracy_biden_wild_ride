@@ -25,7 +25,6 @@ choose-if: resources > 0
 unavailable-subtitle: Not enough resources.
 subtitle: -1 resources
 on-arrival: resources -= 1; media_timer = 0;
-go-to: media
 
 # TODO: differing outcomes based on whether you've seen media, and what kind of media you've supported.
 
