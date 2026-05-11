@@ -2,9 +2,10 @@ title: Reichstag Elections
 new-page: true
 tags: event
 priority: -1
-view-if: (year = 2018 and month = 11) or (year = 2020 and month = 11) or (year = 2022 and month = 11) or (year = 2024 and month = 11) or (year = 2026 and month = 11)
+view-if: ((year = 2018 and month = 11) or (year = 2020 and month = 11) or (year = 2022 and month = 11) or (year = 2024 and month = 11) or (year = 2026 and month = 11)) and election_already_held = 0
 set-jump: post_election_1928
 face-image: img/Rothe_Wahlen_1903.jpg
+on-arrival: election_alredy_held = 1
 
 # TODO: should there be an image?
 
