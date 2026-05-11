@@ -21,9 +21,9 @@ subtitle: We can't pass up this opportunity to expand our voter base. It is time
 
 The question remains, however: How *shall* our course be changed? We have a variety of options for our new media strategy.
 
-- @wip_1: Option 1
-- @wip_2: Option 2
-- @wip_3: Option 3
+- @conglomerate
+- @public_broadcasting
+- @wip
 
 @no
 title: No.
@@ -38,11 +38,13 @@ on-arrival: new_media = 0
 
 What if we back the wrong horse? We must wait for it.
 
-@wip_1
-title: WIP
+@conglomerate
+title: We will form the Liberal Media Conglomerate (LMC): A network of outlets and voices organized under the watchful eye of the party.
 
-@wip_2
-title: WIP
+@public_broadcasting
+choose-if: house_majority == 1 or senate_majority == 1
+title: We will push for expanded funding to public broadcasting stations like PBS and NPR, which traditionally lean left.
+unavailable-subtitle: We lack the Congressional Votes to push a bill through!
 
-@wip_3
+@wip
 title: WIP
