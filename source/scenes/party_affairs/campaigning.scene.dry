@@ -20,6 +20,8 @@ Whether or not we are in an electoral campaign, the party is always trying to br
 - @root: Perhaps the people can be trusted to see reason, *without* our persuasion.
 - @easy_discard
 
+# house seat shares: west coast = 91; south = 150; 
+
 @west_coast
 subtitle: -1 resources
 choose-if: resources >= 1
