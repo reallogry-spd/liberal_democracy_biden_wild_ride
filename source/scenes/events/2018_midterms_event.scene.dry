@@ -1,0 +1,22 @@
+title: The 2018 Midterm Elections
+subtitle: Our chance to undermine the Populists
+tags: event
+view-if: 
+priority: -1
+max-visits: 1
+
+The Midterm elections have arrived. In order to prevent the Populist Administration from enacting their worst excesses, we must hope to gain significant ground in both the Senate and House.
+
+- @continue: Let us hope for the best.
+
+@continue
+
+We can not afford anything but a crushing blow to the Republicans. This beings in the House, which holds the purse strings.
+
+  - @house: The House Results
+
+  @house
+
+  [+ us_house_line +]
+
+  
