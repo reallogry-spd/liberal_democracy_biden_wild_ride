@@ -1,0 +1,135 @@
+title: US Election System Draft
+on-arrival: {!
+Q.us_parties = ['dem', 'gop', 'progressive', 'libertarian'];
+Q.us_party_names = {
+    dem: 'Democratic',
+    gop: 'Republican',
+    progressive: 'Progressive',
+    libertarian: 'Libertarian'
+};
+// Draft regional model. For a state-by-state House, make each state a region
+// and set house_seats to its apportionment. For a broader simulation, use
+// census regions or custom blocs.
+Q.us_regions = [
+    {
+        key: 'northeast',
+        name: 'Northeast',
+        house_seats: 78,
+        senate_seats: 18,
+        support: { dem: 55, gop: 38, progressive: 5, libertarian: 2 }
+    },
+    {
+        key: 'south',
+        name: 'South',
+        house_seats: 159,
+        senate_seats: 32,
+        support: { dem: 42, gop: 54, progressive: 2, libertarian: 2 }
+    },
+    {
+        key: 'midwest',
+        name: 'Midwest',
+        house_seats: 94,
+        senate_seats: 24,
+        support: { dem: 47, gop: 49, progressive: 2, libertarian: 2 }
+    },
+    {
+        key: 'west',
+        name: 'West',
+        house_seats: 104,
+        senate_seats: 26,
+        support: { dem: 52, gop: 42, progressive: 4, libertarian: 2 }
+    }
+
+function clampSupport(value) {
+    if (value < 0) {
+        return 0;
+    }
+    return value;
+}
+
+}
+function allocateSeatsByShare(seats, support, parties) {
+    var total_support = 0;
+    var result = {};
+    var remainders = [];
+    var assigned = 0;
+    for (var party of parties) {
+        total_support += clampSupport(support[party] || 0);
+    }
+    if (total_support <= 0 || seats <= 0) {
+        for (var no_vote_party of parties) {
+            result[no_vote_party] = 0;
+        }
+        return result;
+    }
+    for (var party of parties) {
+        var share = clampSupport(support[party] || 0) / total_support;
+        var exact_seats = share * seats;
+        var whole_seats = Math.floor(exact_seats);
+        result[party] = whole_seats;
+        assigned += whole_seats;
+        remainders.push({
+            party: party,
+            remainder: exact_seats - whole_seats,
+            support: clampSupport(support[party] || 0)
+        });
+    }
+    remainders.sort(function(a, b) {
+        if (b.remainder != a.remainder) {
+            return b.remainder - a.remainder;
+        }
+        return b.support - a.support;
+    });
+    var seats_left = seats - assigned;
+    for (var i = 0; i < seats_left; i++) {
+        result[remainders[i % remainders.length].party] += 1;
+    }
+    return result;
+}
+function addSeats(target, seats, parties) {
+    for (var party of parties) {
+        target[party] += seats[party] || 0;
+    }
+}
+function formatSeatLine(seats, parties, names) {
+    var parts = [];
+    for (var party of parties) {
+        parts.push(names[party] + ': ' + seats[party]);
+    }
+    return parts.join('; ');
+}
+Q.us_house_total = {};
+Q.us_senate_total = {};
+Q.us_region_results = [];
+Q.us_region_results_text = '';
+for (var party of Q.us_parties) {
+    Q.us_house_total[party] = 0;
+    Q.us_senate_total[party] = 0;
+}
+for (var region of Q.us_regions) {
+    var house_result = allocateSeatsByShare(region.house_seats, region.support, Q.us_parties);
+    var senate_result = allocateSeatsByShare(region.senate_seats, region.support, Q.us_parties);
+    addSeats(Q.us_house_total, house_result, Q.us_parties);
+    addSeats(Q.us_senate_total, senate_result, Q.us_parties);
+    Q.us_region_results.push({
+        name: region.name,
+        support: region.support,
+        house: house_result,
+        senate: senate_result,
+        house_line: formatSeatLine(house_result, Q.us_parties, Q.us_party_names),
+        senate_line: formatSeatLine(senate_result, Q.us_parties, Q.us_party_names)
+    });
+    Q.us_region_results_text += '**' + region.name + '**\n\n';
+    Q.us_region_results_text += 'House: ' + formatSeatLine(house_result, Q.us_parties, Q.us_party_names) + '\n\n';
+    Q.us_region_results_text += 'Senate: ' + formatSeatLine(senate_result, Q.us_parties, Q.us_party_names) + '\n\n';
+}
+Q.us_house_line = formatSeatLine(Q.us_house_total, Q.us_parties, Q.us_party_names);
+Q.us_senate_line = formatSeatLine(Q.us_senate_total, Q.us_parties, Q.us_party_names);
+!}
+= US House and Senate Election Draft
+This draft treats each region as a proportional district. Each party's support percentage in that region is normalized, converted into an exact seat share, rounded down, and then any leftover seats are given to the parties with the largest decimal remainders.
+This is not the current real-world US electoral system. It is a proportional alternative based on House and Senate seat pools.
+**National seat totals**
+House: [+ us_house_line +]
+Senate: [+ us_senate_line +]
+**Regional results**
