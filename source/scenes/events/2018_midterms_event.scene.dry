@@ -1,7 +1,7 @@
 title: The 2018 Midterm Elections
 subtitle: Our chance to undermine the Populists
 tags: event
-view-if: 
+view-if: year = 2018 and month = 11
 priority: -1
 max-visits: 1
 
