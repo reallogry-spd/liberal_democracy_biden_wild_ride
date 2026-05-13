@@ -127,6 +127,7 @@ for (var region of Q.us_regions) {
 Q.us_house_line = formatSeatLine(Q.us_house_total, Q.us_parties, Q.us_party_names);
 Q.us_senate_line = formatSeatLine(Q.us_senate_total, Q.us_parties, Q.us_party_names);
 !}
+
 = US House and Senate Election Draft
 This draft treats each region as a proportional district. Each party's support percentage in that region is normalized, converted into an exact seat share, rounded down, and then any leftover seats are given to the parties with the largest decimal remainders.
 This is not the current real-world US electoral system. It is a proportional alternative based on House and Senate seat pools.
