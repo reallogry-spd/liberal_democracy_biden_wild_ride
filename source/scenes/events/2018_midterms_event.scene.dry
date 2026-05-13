@@ -7,16 +7,10 @@ max-visits: 1
 
 The Midterm elections have arrived. In order to prevent the Populist Administration from enacting their worst excesses, we must hope to gain significant ground in both the Senate and House.
 
-- @continue: Let us hope for the best.
+- @continue
 
 @continue
-
-We can not afford anything but a crushing blow to the Republicans. This beings in the House, which holds the purse strings.
-
-- @house
-
-@house
-title: The HouseResults
+title: The House Results
 
 [+ us_house_line +]
 
