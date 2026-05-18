@@ -12,6 +12,6 @@ The Midterm elections have arrived. In order to prevent the Populist Administrat
 @continue
 title: The House Results
 
-[+ us_house_line +]
+${{ var.us_house_line }}
 
   
