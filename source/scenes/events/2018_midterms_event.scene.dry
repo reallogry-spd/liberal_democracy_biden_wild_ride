@@ -202,5 +202,3 @@ Senate: [+ us_senate_line +]
 [+ us_region_results_text +]
 
 - @root.start_menu_2: Return to menu
-
-|}
