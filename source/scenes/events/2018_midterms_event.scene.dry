@@ -1,4 +1,5 @@
 title: US Election System Draft
+view-if: year = 2018 and month = 11
 on-arrival: {!
 Q.us_parties = ['dem', 'gop', 'progressive', 'libertarian'];
 Q.us_party_names = {
@@ -7,7 +8,6 @@ Q.us_party_names = {
     progressive: 'Progressive',
     libertarian: 'Libertarian'
 };
-view-if: year = 2018 and month = 11
 
 // Draft regional model. For a state-by-state House, make each state a region
 // and set house_seats to its apportionment. For a broader simulation, use
