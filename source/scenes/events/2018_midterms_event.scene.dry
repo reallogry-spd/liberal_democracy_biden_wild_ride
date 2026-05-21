@@ -1,5 +1,4 @@
 title: US Election System Draft
-view-if: year = 2018 and month = 11
 on-arrival: {!
 Q.us_parties = ['dem', 'gop', 'progressive', 'libertarian'];
 Q.us_party_names = {
@@ -182,6 +181,7 @@ if (Q.us_senate_majority) {
     Q.us_senate_control_text += ', leaving the chamber without a single-party majority.';
 }
 !}
+view-if: year == 2018 and month == 11
 
 = Election Results
 
