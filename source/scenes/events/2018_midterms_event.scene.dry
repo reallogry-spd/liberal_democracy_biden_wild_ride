@@ -182,6 +182,7 @@ if (Q.us_senate_majority) {
     Q.us_senate_control_text += ', leaving the chamber without a single-party majority.';
 }
 }
+!}
 
 = Election Results
 
