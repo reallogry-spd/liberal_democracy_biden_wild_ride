@@ -1,5 +1,5 @@
 title: US Election System Draft
-
+view-if: year = 2018 and month = 11
 on-arrival: {!
 // Regional Democratic support. Set these from polls, campaign effects,
 // historical vote share, or player choices before the election is run.
