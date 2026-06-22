@@ -1,4 +1,5 @@
 title: US Election System Draft
+subtitle: The nation goes to the polls...
 on-arrival: {!
 // Regional Democratic support. Set these from polls, campaign effects,
 // historical vote share, or player choices before the election is run.
