@@ -116,22 +116,24 @@ view-if: year = 2019 and month = 1
 priority: 2
 max-visits: 1
 
-= Election Results
 
-The returns are in. Each region awards House and Senate seats according to Democratic support in that region, with the remaining seats going Republican.
+The country has made its choice. Reckoning is come.
 
 [+ us_house_control_text +]
 
 [+ us_senate_control_text +]
 
-**National count**
+- @house: The House
+- @senate: The Senate
+- @region: Results by Region
 
+@house
 House: Democrats [+ dem_house_total +], Republicans [+ gop_house_total +] out of [+ us_house_total_check +].
 
+@senate
 Senate: Democrats [+ dem_senate_total +], Republicans [+ gop_senate_total +] out of [+ us_senate_total_check +].
 
-**Regional count**
-
+@region
 [+ us_region_results_text +]
 
 - @root: Return to menu
