@@ -127,9 +127,9 @@ The country has made its choice. Reckoning is come.
 - @senate: The Senate
 
 @house
-House: Democrats [+ dem_house_total +], Republicans [+ gop_house_total +] out of [+ us_house_total_check +].
+Democrats [+ dem_house_total +], Republicans [+ gop_house_total +] out of [+ us_house_total_check +].
 
 @senate
-Senate: Democrats [+ dem_senate_total +], Republicans [+ gop_senate_total +] out of [+ us_senate_total_check +].
+Democrats [+ dem_senate_total +], Republicans [+ gop_senate_total +] out of [+ us_senate_total_check +].
 
 - @root: Return to menu
