@@ -125,15 +125,11 @@ The country has made its choice. Reckoning is come.
 
 - @house: The House
 - @senate: The Senate
-- @region: Results by Region
 
 @house
 House: Democrats [+ dem_house_total +], Republicans [+ gop_house_total +] out of [+ us_house_total_check +].
 
 @senate
 Senate: Democrats [+ dem_senate_total +], Republicans [+ gop_senate_total +] out of [+ us_senate_total_check +].
-
-@region
-[+ us_region_results_text +]
 
 - @root: Return to menu
