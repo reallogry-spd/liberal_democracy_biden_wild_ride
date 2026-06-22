@@ -1,191 +1,120 @@
 title: US Election System Draft
-view-if: year = 2018 and month = 11
+
 on-arrival: {!
-Q.us_parties = ['dem', 'gop', 'progressive', 'libertarian'];
-Q.us_party_names = {
-    dem: 'Democratic',
-    gop: 'Republican',
-    progressive: 'Progressive',
-    libertarian: 'Libertarian'
-};
+// Regional Democratic support. Set these from polls, campaign effects,
+// historical vote share, or player choices before the election is run.
+Q.west_coast_democratic_support = 62;
+Q.midwest_democratic_support = 48;
+Q.rust_belt_democratic_support = 47;
+Q.northeast_democratic_support = 58;
+Q.southeast_democratic_support = 42;
+Q.middle_america_democratic_support = 39;
 
-// Draft regional model. For a state-by-state House, make each state a region
-// and set house_seats to its apportionment. For a broader simulation, use
-// census regions or custom blocs.
-Q.us_regions = [
-    {
-        key: 'northeast',
-        name: 'Northeast',
-        house_seats: 78,
-        senate_seats: 18,
-        support: { dem: 55, gop: 38, progressive: 5, libertarian: 2 }
-    },
-    {
-        key: 'south',
-        name: 'South',
-        house_seats: 159,
-        senate_seats: 32,
-        support: { dem: 42, gop: 54, progressive: 2, libertarian: 2 }
-    },
-    {
-        key: 'midwest',
-        name: 'Midwest',
-        house_seats: 94,
-        senate_seats: 24,
-        support: { dem: 47, gop: 49, progressive: 2, libertarian: 2 }
-    },
-    {
-        key: 'west',
-        name: 'West',
-        house_seats: 104,
-        senate_seats: 26,
-        support: { dem: 52, gop: 42, progressive: 4, libertarian: 2 }
-    }
-];
+// Real House apportionment grouped into six broad political regions.
+// These regions cover all 435 voting House seats.
+Q.west_coast_house_seats = 71;      // CA, OR, WA, AK, HI
+Q.midwest_house_seats = 46;         // IL, IN, IA, MN, MO
+Q.rust_belt_house_seats = 55;       // MI, OH, PA, WI, WV
+Q.northeast_house_seats = 68;       // CT, DE, ME, MD, MA, NH, NJ, NY, RI, VT
+Q.southeast_house_seats = 110;      // AL, AR, FL, GA, KY, LA, MS, NC, SC, TN, VA
+Q.middle_america_house_seats = 85;  // AZ, CO, ID, KS, MT, NE, NV, NM, ND, OK, SD, TX, UT, WY
 
-function clampSupport(value) {
-    if (value < 0) {
+// Senate seats use the same regional groups, two seats per state.
+Q.west_coast_senate_seats = 10;
+Q.midwest_senate_seats = 10;
+Q.rust_belt_senate_seats = 10;
+Q.northeast_senate_seats = 20;
+Q.southeast_senate_seats = 22;
+Q.middle_america_senate_seats = 28;
+
+function clampPercent(percent) {
+    if (percent < 0) {
         return 0;
     }
-    return value;
+    if (percent > 100) {
+        return 100;
+    }
+    return percent;
 }
 
-function allocateSeatsByShare(seats, support, parties) {
-    var total_support = 0;
-    var result = {};
-    var remainders = [];
-    var assigned = 0;
+function seatsFromSupport(total_seats, support_percent) {
+    return Math.round(total_seats * clampPercent(support_percent) / 100);
+}
 
-    for (var party of parties) {
-        total_support += clampSupport(support[party] || 0);
-    }
+function addRegionResult(results, key, name, house_seats, senate_seats, democratic_support) {
+    var dem_house = seatsFromSupport(house_seats, democratic_support);
+    var gop_house = house_seats - dem_house;
+    var dem_senate = seatsFromSupport(senate_seats, democratic_support);
+    var gop_senate = senate_seats - dem_senate;
+    var republican_support = 100 - clampPercent(democratic_support);
 
-    if (total_support <= 0 || seats <= 0) {
-        for (var no_vote_party of parties) {
-            result[no_vote_party] = 0;
-        }
-        return result;
-    }
-
-    for (var party of parties) {
-        var share = clampSupport(support[party] || 0) / total_support;
-        var exact_seats = share * seats;
-        var whole_seats = Math.floor(exact_seats);
-        result[party] = whole_seats;
-        assigned += whole_seats;
-        remainders.push({
-            party: party,
-            remainder: exact_seats - whole_seats,
-            support: clampSupport(support[party] || 0)
-        });
-    }
-
-    remainders.sort(function(a, b) {
-        if (b.remainder != a.remainder) {
-            return b.remainder - a.remainder;
-        }
-        return b.support - a.support;
+    results.push({
+        key: key,
+        name: name,
+        democratic_support: clampPercent(democratic_support),
+        republican_support: republican_support,
+        house_seats: house_seats,
+        senate_seats: senate_seats,
+        dem_house: dem_house,
+        gop_house: gop_house,
+        dem_senate: dem_senate,
+        gop_senate: gop_senate
     });
-
-    var seats_left = seats - assigned;
-    for (var i = 0; i < seats_left; i++) {
-        result[remainders[i % remainders.length].party] += 1;
-    }
-
-    return result;
 }
 
-function addSeats(target, seats, parties) {
-    for (var party of parties) {
-        target[party] += seats[party] || 0;
+function partyControlText(party_name, seats, threshold, chamber_name) {
+    if (seats >= threshold) {
+        return party_name + ' control the ' + chamber_name + ' with ' + seats + ' seats.';
     }
+    return party_name + ' finish first in the ' + chamber_name + ' with ' + seats + ' seats, short of outright control.';
 }
 
-function formatSeatLine(seats, parties, names) {
-    var parts = [];
-    for (var party of parties) {
-        parts.push(names[party] + ': ' + seats[party]);
-    }
-    return parts.join('; ');
-}
-
-function findLargestParty(seats, parties) {
-    var largest_party = parties[0];
-    for (var party of parties) {
-        if ((seats[party] || 0) > (seats[largest_party] || 0)) {
-            largest_party = party;
-        }
-    }
-    return largest_party;
-}
-
-function formatSeatGain(seats, parties, names) {
-    var ordered_parties = parties.slice();
-    ordered_parties.sort(function(a, b) {
-        return (seats[b] || 0) - (seats[a] || 0);
-    });
-
-    var parts = [];
-    for (var party of ordered_parties) {
-        parts.push(names[party] + ' ' + (seats[party] || 0));
-    }
-    return parts.join(', ');
-}
-
-Q.us_house_total = {};
-Q.us_senate_total = {};
 Q.us_region_results = [];
+
+addRegionResult(Q.us_region_results, 'west_coast', 'West Coast', Q.west_coast_house_seats, Q.west_coast_senate_seats, Q.west_coast_democratic_support);
+addRegionResult(Q.us_region_results, 'midwest', 'Midwest', Q.midwest_house_seats, Q.midwest_senate_seats, Q.midwest_democratic_support);
+addRegionResult(Q.us_region_results, 'rust_belt', 'Rust Belt', Q.rust_belt_house_seats, Q.rust_belt_senate_seats, Q.rust_belt_democratic_support);
+addRegionResult(Q.us_region_results, 'northeast', 'Northeast', Q.northeast_house_seats, Q.northeast_senate_seats, Q.northeast_democratic_support);
+addRegionResult(Q.us_region_results, 'southeast', 'Southeast', Q.southeast_house_seats, Q.southeast_senate_seats, Q.southeast_democratic_support);
+addRegionResult(Q.us_region_results, 'middle_america', 'Middle America', Q.middle_america_house_seats, Q.middle_america_senate_seats, Q.middle_america_democratic_support);
+
+Q.dem_house_total = 0;
+Q.gop_house_total = 0;
+Q.dem_senate_total = 0;
+Q.gop_senate_total = 0;
 Q.us_region_results_text = '';
 
-for (var party of Q.us_parties) {
-    Q.us_house_total[party] = 0;
-    Q.us_senate_total[party] = 0;
-}
-
-for (var region of Q.us_regions) {
-    var house_result = allocateSeatsByShare(region.house_seats, region.support, Q.us_parties);
-    var senate_result = allocateSeatsByShare(region.senate_seats, region.support, Q.us_parties);
-
-    addSeats(Q.us_house_total, house_result, Q.us_parties);
-    addSeats(Q.us_senate_total, senate_result, Q.us_parties);
-
-    Q.us_region_results.push({
-        name: region.name,
-        support: region.support,
-        house: house_result,
-        senate: senate_result,
-        house_line: formatSeatLine(house_result, Q.us_parties, Q.us_party_names),
-        senate_line: formatSeatLine(senate_result, Q.us_parties, Q.us_party_names)
-    });
+for (var region of Q.us_region_results) {
+    Q.dem_house_total += region.dem_house;
+    Q.gop_house_total += region.gop_house;
+    Q.dem_senate_total += region.dem_senate;
+    Q.gop_senate_total += region.gop_senate;
 
     Q.us_region_results_text += '**' + region.name + '**\n\n';
-    Q.us_region_results_text += 'In the House delegation, the result is ' + formatSeatGain(house_result, Q.us_parties, Q.us_party_names) + '. ';
-    Q.us_region_results_text += 'The Senate pool returns ' + formatSeatGain(senate_result, Q.us_parties, Q.us_party_names) + '.\n\n';
+    Q.us_region_results_text += 'Democratic support: ' + region.democratic_support + '%. Republican support: ' + region.republican_support + '%.\n\n';
+    Q.us_region_results_text += 'House delegation: Democrats ' + region.dem_house + ', Republicans ' + region.gop_house + ' out of ' + region.house_seats + '.\n\n';
+    Q.us_region_results_text += 'Senate delegation: Democrats ' + region.dem_senate + ', Republicans ' + region.gop_senate + ' out of ' + region.senate_seats + '.\n\n';
 }
 
-Q.us_house_line = formatSeatLine(Q.us_house_total, Q.us_parties, Q.us_party_names);
-Q.us_senate_line = formatSeatLine(Q.us_senate_total, Q.us_parties, Q.us_party_names);
-Q.us_house_winner = findLargestParty(Q.us_house_total, Q.us_parties);
-Q.us_senate_winner = findLargestParty(Q.us_senate_total, Q.us_parties);
-Q.us_house_majority = Q.us_house_total[Q.us_house_winner] >= 218;
-Q.us_senate_majority = Q.us_senate_total[Q.us_senate_winner] >= 51;
-Q.us_house_control_text = Q.us_party_names[Q.us_house_winner] + ' delegates finish first in the House with ' + Q.us_house_total[Q.us_house_winner] + ' seats';
-Q.us_senate_control_text = Q.us_party_names[Q.us_senate_winner] + ' senators finish first in the Senate with ' + Q.us_senate_total[Q.us_senate_winner] + ' seats';
-if (Q.us_house_majority) {
-    Q.us_house_control_text += ', enough for a governing majority.';
+Q.us_house_total_check = Q.dem_house_total + Q.gop_house_total;
+Q.us_senate_total_check = Q.dem_senate_total + Q.gop_senate_total;
+
+if (Q.dem_house_total >= Q.gop_house_total) {
+    Q.us_house_control_text = partyControlText('Democrats', Q.dem_house_total, 218, 'House');
 } else {
-    Q.us_house_control_text += ', short of the 218 seats needed for a majority.';
+    Q.us_house_control_text = partyControlText('Republicans', Q.gop_house_total, 218, 'House');
 }
-if (Q.us_senate_majority) {
-    Q.us_senate_control_text += ', enough for outright control.';
+
+if (Q.dem_senate_total >= Q.gop_senate_total) {
+    Q.us_senate_control_text = partyControlText('Democrats', Q.dem_senate_total, 51, 'Senate');
 } else {
-    Q.us_senate_control_text += ', leaving the chamber without a single-party majority.';
+    Q.us_senate_control_text = partyControlText('Republicans', Q.gop_senate_total, 51, 'Senate');
 }
 !}
 
 = Election Results
 
-The returns are in. Under this proportional system, every region sends delegations that closely match its political balance, so strong regional support produces seats even when a party does not finish first.
+The returns are in. Each region awards House and Senate seats according to Democratic support in that region, with the remaining seats going Republican.
 
 [+ us_house_control_text +]
 
@@ -193,9 +122,9 @@ The returns are in. Under this proportional system, every region sends delegatio
 
 **National count**
 
-House: [+ us_house_line +]
+House: Democrats [+ dem_house_total +], Republicans [+ gop_house_total +] out of [+ us_house_total_check +].
 
-Senate: [+ us_senate_line +]
+Senate: Democrats [+ dem_senate_total +], Republicans [+ gop_senate_total +] out of [+ us_senate_total_check +].
 
 **Regional count**
 
