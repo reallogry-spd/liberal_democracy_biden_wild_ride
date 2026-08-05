@@ -3,6 +3,7 @@ subtitle: America decides...
 view-if: year = 2018 and month = 11
 max-visits: 1
 tags: event
+on-arrival: election_already_held = 1
 
 = The 2018 Midterms
 
