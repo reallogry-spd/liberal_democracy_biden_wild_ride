@@ -1,135 +1,25 @@
-title: US Election System Draft
-subtitle: The nation goes to the polls...
-on-arrival: {!
-// Regional Democratic support. Set these from polls, campaign effects,
-// historical vote share, or player choices before the election is run.
-Q.west_coast_democratic_support = 62;
-Q.midwest_democratic_support = 48;
-Q.rust_belt_democratic_support = 47;
-Q.northeast_democratic_support = 58;
-Q.southeast_democratic_support = 42;
-Q.middle_america_democratic_support = 39;
-
-// Real House apportionment grouped into six broad political regions.
-// These regions cover all 435 voting House seats.
-Q.west_coast_house_seats = 71;      // CA, OR, WA, AK, HI
-Q.midwest_house_seats = 46;         // IL, IN, IA, MN, MO
-Q.rust_belt_house_seats = 55;       // MI, OH, PA, WI, WV
-Q.northeast_house_seats = 68;       // CT, DE, ME, MD, MA, NH, NJ, NY, RI, VT
-Q.southeast_house_seats = 110;      // AL, AR, FL, GA, KY, LA, MS, NC, SC, TN, VA
-Q.middle_america_house_seats = 85;  // AZ, CO, ID, KS, MT, NE, NV, NM, ND, OK, SD, TX, UT, WY
-
-// Senate seats use the same regional groups, two seats per state.
-Q.west_coast_senate_seats = 10;
-Q.midwest_senate_seats = 10;
-Q.rust_belt_senate_seats = 10;
-Q.northeast_senate_seats = 20;
-Q.southeast_senate_seats = 22;
-Q.middle_america_senate_seats = 28;
-
-function clampPercent(percent) {
-    if (percent < 0) {
-        return 0;
-    }
-    if (percent > 100) {
-        return 100;
-    }
-    return percent;
-}
-
-function seatsFromSupport(total_seats, support_percent) {
-    return Math.round(total_seats * clampPercent(support_percent) / 100);
-}
-
-function addRegionResult(results, key, name, house_seats, senate_seats, democratic_support) {
-    var dem_house = seatsFromSupport(house_seats, democratic_support);
-    var gop_house = house_seats - dem_house;
-    var dem_senate = seatsFromSupport(senate_seats, democratic_support);
-    var gop_senate = senate_seats - dem_senate;
-    var republican_support = 100 - clampPercent(democratic_support);
-
-    results.push({
-        key: key,
-        name: name,
-        democratic_support: clampPercent(democratic_support),
-        republican_support: republican_support,
-        house_seats: house_seats,
-        senate_seats: senate_seats,
-        dem_house: dem_house,
-        gop_house: gop_house,
-        dem_senate: dem_senate,
-        gop_senate: gop_senate
-    });
-}
-
-function partyControlText(party_name, seats, threshold, chamber_name) {
-    if (seats >= threshold) {
-        return party_name + ' control the ' + chamber_name + ' with ' + seats + ' seats.';
-    }
-    return party_name + ' finish first in the ' + chamber_name + ' with ' + seats + ' seats, short of outright control.';
-}
-
-Q.us_region_results = [];
-
-addRegionResult(Q.us_region_results, 'west_coast', 'West Coast', Q.west_coast_house_seats, Q.west_coast_senate_seats, Q.west_coast_democratic_support);
-addRegionResult(Q.us_region_results, 'midwest', 'Midwest', Q.midwest_house_seats, Q.midwest_senate_seats, Q.midwest_democratic_support);
-addRegionResult(Q.us_region_results, 'rust_belt', 'Rust Belt', Q.rust_belt_house_seats, Q.rust_belt_senate_seats, Q.rust_belt_democratic_support);
-addRegionResult(Q.us_region_results, 'northeast', 'Northeast', Q.northeast_house_seats, Q.northeast_senate_seats, Q.northeast_democratic_support);
-addRegionResult(Q.us_region_results, 'southeast', 'Southeast', Q.southeast_house_seats, Q.southeast_senate_seats, Q.southeast_democratic_support);
-addRegionResult(Q.us_region_results, 'middle_america', 'Middle America', Q.middle_america_house_seats, Q.middle_america_senate_seats, Q.middle_america_democratic_support);
-
-Q.dem_house_total = 0;
-Q.gop_house_total = 0;
-Q.dem_senate_total = 0;
-Q.gop_senate_total = 0;
-Q.us_region_results_text = '';
-
-for (var region of Q.us_region_results) {
-    Q.dem_house_total += region.dem_house;
-    Q.gop_house_total += region.gop_house;
-    Q.dem_senate_total += region.dem_senate;
-    Q.gop_senate_total += region.gop_senate;
-
-    Q.us_region_results_text += '**' + region.name + '**\n\n';
-    Q.us_region_results_text += 'Democratic support: ' + region.democratic_support + '%. Republican support: ' + region.republican_support + '%.\n\n';
-    Q.us_region_results_text += 'House delegation: Democrats ' + region.dem_house + ', Republicans ' + region.gop_house + ' out of ' + region.house_seats + '.\n\n';
-    Q.us_region_results_text += 'Senate delegation: Democrats ' + region.dem_senate + ', Republicans ' + region.gop_senate + ' out of ' + region.senate_seats + '.\n\n';
-}
-
-Q.us_house_total_check = Q.dem_house_total + Q.gop_house_total;
-Q.us_senate_total_check = Q.dem_senate_total + Q.gop_senate_total;
-
-if (Q.dem_house_total >= Q.gop_house_total) {
-    Q.us_house_control_text = partyControlText('Democrats', Q.dem_house_total, 218, 'House');
-} else {
-    Q.us_house_control_text = partyControlText('Republicans', Q.gop_house_total, 218, 'House');
-}
-
-if (Q.dem_senate_total >= Q.gop_senate_total) {
-    Q.us_senate_control_text = partyControlText('Democrats', Q.dem_senate_total, 51, 'Senate');
-} else {
-    Q.us_senate_control_text = partyControlText('Republicans', Q.gop_senate_total, 51, 'Senate');
-}
-!}
-tags: event
-view-if: year = 2019 and month = 1
-priority: 2
+title: The 2018 Midterms
+subtitle: America decides...
+view-if: year = 2018 and month = 11
 max-visits: 1
+tages: event
 
+= The 2018 Midterms
 
-The country has made its choice. Reckoning is come.
+The time has come. Our performance in this election may decide the future of American democracy. 
 
-[+ us_house_control_text +]
+For many, failure is not an option.
 
-[+ us_senate_control_text +]
+We have 2 separate sets of results to see. Let's start with the Senate
 
-- @house: The House
-- @senate: The Senate
-
-@house
-Democrats [+ dem_house_total +], Republicans [+ gop_house_total +] out of [+ us_house_total_check +].
+- @senate: The Senate Results
 
 @senate
-Democrats [+ dem_senate_total +], Republicans [+ gop_senate_total +] out of [+ us_senate_total_check +].
+A disappointing results. Even though we won the national popular vote, the Republicans have made off with 2 of our seats, leaving them with a 53 seat majority.
 
-- @root: Return to menu
+Maybe the our numerous House campaigns will bring us some better news?
+
+- @house: The House Results
+
+@house
+The House presents us with a much better situation. We have managed to steal 41 seats, giving us the majority in the lower house of Congress.
