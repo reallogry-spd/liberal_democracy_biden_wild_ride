@@ -15,13 +15,17 @@ We have 2 separate sets of results to see. Let's start with the Senate
 - @senate: The Senate Results
 
 @senate
+face-image = senate_results_1.png
 
-A disappointing results. Even though we won the national popular vote, the Republicans have made off with 2 of our seats, leaving them with a 53 seat majority.
+A disappointing result. Even though we won the national popular vote, the Republicans have made off with 2 of our seats, leaving them with a 53 seat majority.
 
-Maybe the our numerous House campaigns will bring us some better news?
+Maybe our numerous House campaigns will bring us some better news?
 
 - @house: The House Results
 
 @house
+face-image: house_results_1.png
 
 The House presents us with a much better situation. We have managed to steal 41 seats, giving us the majority in the lower house of Congress.
+
+Now comes the question of leadership.
