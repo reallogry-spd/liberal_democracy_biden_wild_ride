@@ -29,7 +29,7 @@ Chuck Schumer is given two more years as Senate Minority Leader. What's going on
 
 @no_schumer
 title: We can't give Schumer two more years.
-choose-if: populism >= 80
+choose-if: populism > 80
 subtitle: He is the reason we lost, after all.
 unavailable-subtitle: The Establishment's influence is too great
 
@@ -61,7 +61,7 @@ Tim Ryan has been persuaded to make a formal bid for Speaker of the House! The q
 - @no: He does not!
 
 @yes
-view-if: populism >= 70
+view-if: populism > 70
 
 Amazingly, Tim Ryan has won the Speakership election! The defeat of Pelosi marks a major shift in the attitude of the national Democratic Party.
 
