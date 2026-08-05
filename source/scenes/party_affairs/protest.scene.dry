@@ -35,7 +35,7 @@ on-arrival: populism -= 3
 Our speakers demand the continuation of traditional moderate neoliberal policies. It's nothing striking, but it is a reliable platform.
 
 @environmentalism
-on-arrival: populism += 7
+on-arrival: populism += 100
 
 Our speakers rail hard against fossil fuels and, specifically, large corporations polluting the environment. They call for the Green New Deal to create jobs and reduce our dependence on fossil fuels.
 
