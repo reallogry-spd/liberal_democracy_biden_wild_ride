@@ -38,7 +38,7 @@ if (Q.ideology && Q.ideology != "mainstream") {
 }
 !}
 go-to: changed if changed = 1
-on-departure: ideology = "mainstream"; mainstream_strength += 10; mainstream_dissent -= 10; conservative_dissent -= 5;
+on-departure: ideology = "mainstream"; mainstream_strength += 10; mainstream_dissent -= 10; conservative_dissent -= 5; populism -= 5
 
 The Mainstream Democrats, such as Joe Biden and Chuck Schumer, have defined the modern Democrats, to limited but stable success. Why stop now?
 
@@ -49,7 +49,7 @@ if (Q.ideology && Q.ideology != "progressive") {
 }
 !}
 go-to: changed if changed = 1
-on-departure: ideology = "progressiver"; progressive_strength += 10; progressive_dissent -= 10; mainstream_dissent -= 5; socialist_dissent -= 5
+on-departure: ideology = "progressiver"; progressive_strength += 10; progressive_dissent -= 10; mainstream_dissent -= 5; socialist_dissent -= 5; populism += 5
 
 The Progressive wing, once dominant, is now struggling to build support. Bernie Sanders and Elizabeth Warren are trademark members of this faction.
 
