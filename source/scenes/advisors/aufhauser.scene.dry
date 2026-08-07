@@ -27,7 +27,7 @@ We have gained some extra money through grassroots fundraising.
 title: Budget Reconciliation Measure
 subtitle: Use Sanders' position as Budget Committee Chair to pass budget legislation.
 choose-if: advisor_action_timer <= 0
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?] [? If senate_majority = 0 : We do not hold a Senate majority! ?]
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? If senate_majority = 0 : We do not hold a Senate majority! ?]
 on-arrival: advisor_action_timer = 6
 
 We have utilized reconciliation in order to pass our budget.
