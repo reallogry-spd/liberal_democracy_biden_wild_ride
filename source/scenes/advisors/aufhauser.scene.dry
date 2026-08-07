@@ -1,51 +1,41 @@
-title: Siegfried Aufhäuser
+title: Bernie Sanders
 is-pinned-card: true
-tags: advisor, reformist
+tags: advisor, socialist
 card-image: img/portraits/AufhäuserSiegfried.jpg
-view-if: aufhauser_advisor = 1
+view-if: sanders_advisor = 1
 new-page: true 
 
-= Siegfried Aufhäuser
+= Bernie Sanders
 
-Aufhäuser is a leader of the AfA-Bund, the federation of socialist white-collar trade unions.
+Sanders is the standard-bearer of the Socialist wing, though one of its less radical members. He serves technically as an independent Senator, but is a member of the Progressive Caucus and holds influence in the Party.
 
-- @white_collar
-- @union_unity
-- @crisis
-- @moderate_economic_plan
+- @grassroots
+- @reconciliation
+- @mobilize
 - @root: Return to main
 
-@white_collar
-title: Organizing white-collar workers
-subtitle: Improve our standing among the new middle class.
+@grassroots
+title: Grassroots Fundraising
+subtitle: Raise limited funds from voters
 choose-if: advisor_action_timer <= 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?] 
-on-arrival: advisor_action_timer = 6; new_middle_spd += 6*(1-dissent);
+on-arrival: advisor_action_timer = 6; resources += (dues-1)
 
-We have increased our organizing among white-collar workers.
+We have gained some extra money through grassroots fundraising.
 
-@union_unity
-title: Union-party coordination
-subtitle: Reduce dissent among the unions.
+@reconciliation
+title: Budget Reconciliation Measure
+subtitle: Use Sanders' position as Budget Committee Chair to pass budget legislation.
 choose-if: advisor_action_timer <= 0
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
-on-arrival: advisor_action_timer = 6; labor_dissent -= 10;
-
-We have reduced tensions with the Labor faction.
-
-@crisis
-title: Addressing the economic crisis
-subtitle: Aufhäuser can help support a left-wing economic program.
-choose-if: advisor_action_timer <= 0 and nationalization_adopted == 0 and black_thursday_seen == 1 and nationalization_support <= 3
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if black_thursday_seen == 0 : We are not currently in an economic crisis. ?][? if nationalization_adopted > 0 : We have already adopted the Left plan. ?]
-on-arrival: advisor_action_timer = 6; 
-go-to: crisis_program.support_left 
-
-@moderate_economic_plan
-title: Support the reformist economic plan
-subtitle: Aufhäuser can also support a moderate economic plan.
-choose-if: advisor_action_timer = 0 and moderate_plan_adopted = 0 and black_thursday_seen = 1
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?] [? if moderate_economic_plan = 0 : We have already adopted the reformist economic plan. ?] [? if black_thursday_seen == 0 : We are not currently in an economic crisis. ?]
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?] [? If senate_majority = 0 : We do not hold a Senate majority! ?]
 on-arrival: advisor_action_timer = 6
-go-to: crisis_program.support_moderate
+
+We have utilized reconciliation in order to pass our budget.
+
+@mobilize
+title: Mobilize the Socialist wing
+subtitle: Sanders, as a populist, is very effective at mobilizing the less fortunate to vote for Socialist candidates.
+choose-if: advisor_action_timer <= 0 and dsa_split = 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if dsa_split = 1 : There's no point in competing with DSA. ?]
+on-arrival: socialist_strength += 10; socialist_dissent -= 10; conservative dissent += 5; mainstream_dissent += 2
 
