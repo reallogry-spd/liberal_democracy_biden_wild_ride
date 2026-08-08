@@ -1,0 +1,65 @@
+title: Alexandria Ocasio-Cortez
+is-pinned-card: true
+tags: advisor, labor
+card-image: aoc.jpg
+view-if: aoc_advisor = 1
+new-page: true 
+
+= Alexandria Ocasio-Cortez
+
+AOC is a New York Congresswoman who holds significant sway over the Socialist wing. She is a emmber of the Democratic Socialists of America.
+
+- @mobilize
+- @organize
+- @dsa_relations
+- @root: Return to main
+
+@mobilize
+title: Mobilizong younger voters
+subtitle: -1 resource - AOC is very effective at increasing Democratic turnout among young voters.
+choose-if: advisor_action_timer <= 0 and resources >= 1
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if resources < 1 : We don't have enough resources! ?]
+on-arrival: advisor_action_timer = 6; socialist_strength += 7; socialist_dissent += 2
+
+We have increased our mobilization efforts among younger voters.
+
+@organize
+title: Organizing Hispanic voters
+subtitle: -1 resource - Though older Hispanic voters are skeptical, AOC polls very well with younger Hispanic voters. This is useful.
+choose-if: advisor_action_timer <= 0 and resources >= 1
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if resources < 1 : We don't have enough resources! ?]
+on-arrival: advisor_action_timer = 6; socialist_strength += 3
+
+We have increased our campaigning among Hispanic voters.
+
+@dsa_relations
+title: Relations with the DSA
+subtitle: How should we deal with the Socialist organization?
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: advisor_action_timer = 6
+
+We have the option to shift or maintain our current attitude toward DSA. What should we do?
+
+- @defense
+- @cooperate
+- @ignore
+
+@defense
+title: We must defend the established Democratic lawmakers against DSA insurgents.
+subtitle: This could have the effect of radicalizing the group even further!
+on-arrival: socialist_strength -= 10; socialist_dissent += 10; populism -= 5
+
+We have focused on protecting Establishment candidates against insurgents.
+
+@cooperate
+title: We should cooperate more with DSA. They *are* the future of the party.
+subtitle: The Establishment won't like this.
+on-arrival: socialist_strength += 5; socialist_dissent -= 10; populism += 5
+
+We have expanded our cooperation with the Democratic Socialists.
+
+@ignore
+title: The DSA can be ignored for now
+subtitle: Can they?
+on-arrival: socialist_strength += 10; socialist_dissent += 5; populism += 5
