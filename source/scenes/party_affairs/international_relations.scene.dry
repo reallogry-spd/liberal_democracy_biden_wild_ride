@@ -39,7 +39,7 @@ The Nordic social democrats have done a stellar job at marketing welfare, and we
 subtitle: -1 resources
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
-on-arrival: socialist_dissent -= 5; progressive_dissent -=5; mainstream_dissent -= 5; conservative dissent -= 5; populism -= 5
+on-arrival: socialist_dissent -= 5; progressive_dissent -= 5; mainstream_dissent -= 5; conservative dissent -= 5; populism -= 5
 
 The German Social Democrats have demonstrated effectiveness at holding together a broad coalition electorally, as well as building broad coalitions in the Bundestag. We can learn much from them, especially regarding our own internal factionalism.
 
