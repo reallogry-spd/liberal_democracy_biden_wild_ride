@@ -52,7 +52,7 @@ on-arrival: resources -= 1; populism += 4; socialist_dissent -= 5; progressive_d
 The Workers' Party in Brazil is a shining example of the success of economic populism. They could help us refine and expand our own economic messaging and policymaking.
 
 @israel
-subtitle: -1 resources [? if year = 2018 : - The israeli Legislative Elections are upcoming... could our support make a difference? ?][? if year = 2019 and month < 4 : The Israeli Legislative Elections are upcoming... could our support make a difference? ?]
+subtitle: -1 resources [? if year = 2018 : - The Israeli Legislative Elections are upcoming... could our support make a difference? ?][? if year = 2019 and month < 4 : The Israeli Legislative Elections are upcoming... could our support make a difference? ?]
 choose-if: resources >= 1
 unavailable-subtitle: Not enough resources.
 on-arrival: resources -= 1
