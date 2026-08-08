@@ -11,8 +11,9 @@ Sanders is the standard-bearer of the Socialist wing. Though he is technically a
 
 - @grassroots
 - @reconciliation
-- @crisis
-- @moderate_economic_plan
+- @mobilize
+- @organize
+- @unity
 - @root: Return to main
 
 @grassroots
@@ -20,7 +21,7 @@ title: Grassroots Fundraising
 subtitle: Raise limited funds directly through voters
 choose-if: advisor_action_timer <= 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?] 
-on-arrival: advisor_action_timer = 6; resources += (dues-1)
+on-arrival: advisor_action_timer = 6; resources += (dues-1); populism += 2
 
 Sanders has used his grassroots campaigning skills to raise funds for the party.
 
@@ -29,22 +30,33 @@ title: Budget Reconciliation
 subtitle: Utilize Sanders' position as Budget Committee Chair
 choose-if: advisor_action_timer <= 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if senate_majority = 0 : Sanders is not Chair of the Budget Committee! ?]
-on-arrival: advisor_action_timer = 6; labor_dissent -= 10;
+on-arrival: advisor_action_timer = 6
 
 With Sanders as Chair of the Budget Committee, we are able to use the Budget Reconciliation process to pass funding legislation.
 
-@crisis
-title: Addressing the economic crisis
-subtitle: Aufhäuser can help support a left-wing economic program.
-choose-if: advisor_action_timer <= 0 and nationalization_adopted == 0 and black_thursday_seen == 1 and nationalization_support <= 3
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if black_thursday_seen == 0 : We are not currently in an economic crisis. ?][? if nationalization_adopted > 0 : We have already adopted the Left plan. ?]
-on-arrival: advisor_action_timer = 6; 
-go-to: crisis_program.support_left 
+@mobilize
+title: Mobilize the Socialist wing
+subtitle: Using his sway over the party, Sanders can invigorate the Socialists.
+choose-if: advisor_action_timer <= 0 and dsa_split = 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if dsa_split != 0 : With DSA Independent, our Socialist wing is practically nonexistent. ?]
+on-arrival: advisor_action_timer = 6; socialist_strength += 10; populism += 7; conservative_dissent += 10; mainstream_dissent += 5
 
-@moderate_economic_plan
-title: Support the reformist economic plan
-subtitle: Aufhäuser can also support a moderate economic plan.
-choose-if: advisor_action_timer = 0 and moderate_plan_adopted = 0 and black_thursday_seen = 1
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?] [? if moderate_economic_plan = 0 : We have already adopted the reformist economic plan. ?] [? if black_thursday_seen == 0 : We are not currently in an economic crisis. ?]
-on-arrival: advisor_action_timer = 6
-go-to: crisis_program.support_moderate
+We have mobilized the Democratic Socialists within the party.
+
+@organize
+title: Organize blue-collar voters
+subtitle: Sanders has proven to be extremely effective at mobilizing working-class voters to vote blue.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: advisor_action_timer = 6; populism += 3; socialist_strength += 3; progressive_strength += 2
+
+Sanders has used his grassroots campaigning skills to increase Democratic turnout among blue-collar workers.
+
+@unity
+title: Socialist-Progressive Unity
+subtitle: Sanders represents a bridge between the Socialists and Progressives; that can be utilized.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+on-arrival: advisor_action_timer = 0; socialist_strength += 2; progressive_strength += 2; populism += 2; socialist_dissent -= 10; progressive_dissent -= 10
+
+Sanders has used his wide-reaching connections to foster goodwill between the Socialists and Progressives.
