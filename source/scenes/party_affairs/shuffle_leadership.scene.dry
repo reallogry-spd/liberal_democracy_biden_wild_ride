@@ -302,7 +302,7 @@ frequency: 1
 @mainstream
 view-if: n_advisors < 3
 
-- #centrist_advisor
+- #center_advisor
 
 @conservative
 view-if: n_advisors < 3
