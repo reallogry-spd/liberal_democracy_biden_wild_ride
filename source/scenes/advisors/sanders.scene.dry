@@ -1,7 +1,7 @@
 title: Bernie Sanders
 is-pinned-card: true
 tags: advisor, reformist
-card-image: img/portraits/AufhäuserSiegfried.jpg
+card-image: bernie.jpg
 view-if: sanders_advisor = 1
 new-page: true 
 
@@ -28,7 +28,7 @@ Sanders has used his grassroots campaigning skills to raise funds for the party.
 @reconciliation
 title: Budget Reconciliation
 subtitle: Utilize Sanders' position as Budget Committee Chair
-choose-if: advisor_action_timer <= 0
+choose-if: advisor_action_timer <= 0 and senate_majority = 1
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if senate_majority = 0 : Sanders is not Chair of the Budget Committee! ?]
 on-arrival: advisor_action_timer = 6
 
