@@ -2,7 +2,7 @@ title: Bernie Sanders
 is-pinned-card: true
 tags: advisor, reformist
 card-image: img/portraits/AufhäuserSiegfried.jpg
-view-if: aufhauser_advisor = 1
+view-if: sanders_advisor = 1
 new-page: true 
 
 = Bernie Sanders
