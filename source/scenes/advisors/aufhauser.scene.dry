@@ -10,7 +10,7 @@ new-page: true
 Sanders is the standard-bearer of the Socialist wing. Though he is technically an Independent, he holds significant sway over the party.
 
 - @grassroots
-- @union_unity
+- @reconciliation
 - @crisis
 - @moderate_economic_plan
 - @root: Return to main
@@ -22,16 +22,16 @@ choose-if: advisor_action_timer <= 0
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?] 
 on-arrival: advisor_action_timer = 6; resources += (dues-1)
 
-We have increased our organizing among white-collar workers.
+Sanders has used his grassroots campaigning skills to raise funds for the party.
 
-@union_unity
-title: Union-party coordination
-subtitle: Reduce dissent among the unions.
+@reconciliation
+title: Budget Reconciliation
+subtitle: Utilize Sanders' position as Budget Committee Chair
 choose-if: advisor_action_timer <= 0
-unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?]
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before next advisor action. ?][? if senate_majority = 0 : Sanders is not Chair of the Budget Committee! ?]
 on-arrival: advisor_action_timer = 6; labor_dissent -= 10;
 
-We have reduced tensions with the Labor faction.
+With Sanders as Chair of the Budget Committee, we are able to use the Budget Reconciliation process to pass funding legislation.
 
 @crisis
 title: Addressing the economic crisis
