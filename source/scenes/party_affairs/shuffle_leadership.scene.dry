@@ -122,13 +122,13 @@ go-to: rm_main
 Leipart has been removed as an advisor. The Labor faction disapproves.
 
 @remove_aufhauser
-title: Remove Aufhäuser
-view-if: aufhauser_advisor = 1
+title: Remove Sanders
+view-if: sanders_advisor = 1
 tags: remove_advisor
-on-arrival: aufhauser_advisor = 0; labor_dissent += 5; n_advisors -= 1
+on-arrival: sanders_advisor = 0; socialist_dissent += 5; n_advisors -= 1
 go-to: rm_main
 
-Aufhäuser has been removed as an advisor. The Labor faction disapproves.
+Sanders has been removed as an advisor. The Socialist faction disapproves.
 
 @remove_wissell
 title: Remove Wissell
@@ -290,36 +290,36 @@ tags: center_advisor, left_advisor, reformist_advisor, labor_advisor, neorev_adv
 frequency: 1
 
 
-- @centrist: Add Centrists
-- @left: Add Leftists
-- @reformist: Add Reformists
-- @labor: Add Labor
-- @neorev: Add Neorevisionists
+- @mainstream: Add Mainstreamers
+- @progressive: Add Progressives
+- @conservative: Add Conservatives
+- @socialist: Add Socialists
+- @abundance: Add Abundance Politicians
 - @nonfactional: Add non-factional advisors
 - @rm_main: Remove advisors instead.
 - @remove_none: Stop changing advisors.
 
-@centrist
+@mainstream
 view-if: n_advisors < 3
 
-- #center_advisor
+- #centrist_advisor
 
-@reformist
+@conservative
 view-if: n_advisors < 3
 
 - #reformist_advisor
 
-@left
+@progressive
 view-if: n_advisors < 3
 
 - #left_advisor
 
-@labor
+@socialist
 view-if: n_advisors < 3
 
 - #labor_advisor
 
-@neorev
+@abundance
 view-if: neorevisionism > 0 and n_advisors < 3
 
 - #neorev_advisor
@@ -508,17 +508,17 @@ go-to: advisor_menu
 
 Theodor Leipart is now an advisor.
 
-@add_aufhauser
-title: Siegfried Aufhäuser
-subtitle: Siegfried Aufhäuser is the leader of the AfA-Bund, the white-collar trade union federation. {!<br><br>!}[? if difficulty < 0 : Actions - Organizing White-Collar Workers, Union-Party Coordination, Addressing the Economic Crisis ?]
+@add_sanders
+title: Bernie Sanders
+subtitle: Bernie Sanders is the standard-bearer of the Socialist wing, though one of its less radical members. He serves technically as an independent Senator, but is a member of the Progressive Caucus and holds influence in the Party.
 is-card: true
 card-image: img/portraits/AufhäuserSiegfried.jpg
 tags: labor_advisor
-view-if: aufhauser_advisor = 0 and n_advisors < 3
-on-arrival: aufhauser_advisor = 1; n_advisors += 1; labor_strength += 5
+view-if: sanders_advisor = 0 and n_advisors < 3
+on-arrival: sanders_advisor = 1; n_advisors += 1; socialist_strength += 5
 go-to: advisor_menu
 
-Siegfried Aufhäuser is now an advisor.
+Bernie Sanders is now an advisor.
 
 @add_wissell
 title: Rudolf Wissell
