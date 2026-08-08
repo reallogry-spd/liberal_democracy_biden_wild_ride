@@ -110,18 +110,18 @@ go-to: rm_main
 Pfülf has been removed as an advisor. The Reformist faction disapproves.
 
 
-# labor
+# socialists
 
-@remove_leipart
-title: Remove Leipart
-view-if: leipart_advisor = 1
+@remove_aoc
+title: Remove Ocasio-Cortez
+view-if: aoc_advisor = 1
 tags: remove_advisor
-on-arrival: leipart_advisor = 0; labor_dissent += 5; n_advisors -= 1
+on-arrival: aoc_advisor = 0; socialist_dissent += 5; n_advisors -= 1
 go-to: rm_main
 
-Leipart has been removed as an advisor. The Labor faction disapproves.
+AOC has been removed as an advisor. The Socialist faction disapproves.
 
-@remove_aufhauser
+@remove_sanders
 title: Remove Sanders
 view-if: sanders_advisor = 1
 tags: remove_advisor
@@ -496,17 +496,16 @@ Anna Siemsen is now an advisor.
 
 # labor
 
-@add_leipart
-title: Theodor Leipart
-subtitle: Theodor Leipart is the leader of the ADGB, the German Trade Union Federation. {!<br><br>!}[? if difficulty < 0 : Actions - Organizing Workers, Addressing the Economic Crisis ?]
-is-card: true
+@add_aoc
+title: Alexandria Ocasio-cortez
+subtitle: Alexandra Ocasio-Cortez is a New York Congresswoman who holds significant influence over the Socialist wing. She is a member of the Democratic Socialists of America (DSA).
 card-image: img/portraits/LeipartTheodor.jpg
 tags: labor_advisor
-view-if: leipart_advisor = 0 and n_advisors < 3 and unions_independent = 0
-on-arrival: leipart_advisor = 1; n_advisors += 1; labor_strength += 5
+view-if: aoc_advisor = 0 and n_advisors < 3 and dsa_split = 0
+on-arrival: aoc_advisor = 1; n_advisors += 1; socialist_strength += 5; conservative_dissent += 5
 go-to: advisor_menu
 
-Theodor Leipart is now an advisor.
+Alexandria Ocasio-Cortez is now an advisor.
 
 @add_sanders
 title: Bernie Sanders
