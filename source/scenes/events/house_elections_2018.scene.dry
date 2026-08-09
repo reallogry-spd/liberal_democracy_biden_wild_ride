@@ -3,6 +3,8 @@ subtitle: Will our hopeful expectations bear true?
 tags: event
 new-page: true
 view-if: year = 2018 and month = 11
+priority: 1
+max-visits: 1
 
 The House of Representatives Elections are to be held
 
