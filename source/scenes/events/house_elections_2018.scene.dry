@@ -1,5 +1,7 @@
 title: 2018 House Elections
 subtitle: Will our hopeful expectations bear true?
+tags: event
+new-page: true
 view-if: year = 2018 and month = 11
 
 The House of Representatives Elections are to be held
