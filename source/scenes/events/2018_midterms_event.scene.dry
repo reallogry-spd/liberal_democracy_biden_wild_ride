@@ -204,7 +204,6 @@ on-display: {!
   } else {
     drawChart();
   }
-!}
 go-to: house_menu
 
 = House Election Results
