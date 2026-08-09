@@ -1,0 +1,267 @@
+title: 2018 House Elections
+subtitle: Will our hopeful expectations bear true?
+view-if: year = 2018 and month = 11
+
+The House of Representatives Elections are to be held
+
+@continue: May we do our best...
+
+@continue
+on-arrival: {!
+
+// Save old seat values
+for (let party of Q.parties) {
+    Q["old_" + party + "_r"] = Q[party + "_r"] || 0;
+}
+
+// === 2. Calculate raw vote totals using blended support (20% local, 80% national) ===
+let repVotes = 0;
+let demVotes = 0;
+let dsaVotes = 0;
+let otherVotes = 0;
+
+for (let state of Q.states) {
+  for (let cls of Q.classes) {
+      let rep = Q[state + "_" + cls + "_rep"] || 0;
+      let dem = Q[state + "_" + cls + "_dem"] || 0;
+      let dsa = Q[state + "_" + cls + "_dsa"] || 0;
+      let other = Q[state + "_" + cls + "_other"] || 0;
+
+      let repMod = Q[cls + "_rep"] || 0;
+      let demMod = Q[cls + "_dem"] || 0;
+      let dsaMod = Q[cls + "_dsa"] || 0;
+      let otheMod = Q[cls + "_other"] || 0;
+
+      let adjRep = 0.2 * rep + 0.8 * repMod;
+      let adjDem = 0.2 * dem + 0.8 * demMod;
+      let adjDsa = Q.dsa_split ? (0.2 * dsa + 0.8 * dsaMod) : 0;
+      let adjOther = 0.2 * other + 0.8 * otherMod;
+
+      let totalPct = adjRep + adjDem + adjDsa + adjOther;
+      if (totalPct === 0) continue;
+
+      repVotes += pop * (adjRep / totalPct);
+      demVotes += pop * (adjDem / totalPct);
+      dsaVotes += pop * (adjdsa / totalPct);
+      otherVotes += pop * (adjOther / totalPct);
+      }
+    }
+  }
+}
+
+// === 3. Allocate seats using cube law ===
+let totalVotes = repVotes + demVotes + dsaVotes + otherVotes;
+
+totalSeats = 435
+
+let repShare = repVotes / totalVotes;
+let demShare = demVotes / totalVotes;
+let dsaShare = dsaVotes / totalVotes;
+let otherShare = otherVotes / totalVotes;
+
+let repPower = Math.pow(repShare, 3);
+let demPower = Math.pow(demShare, 3);
+let dsaPower = Q.dsa_split ? Math.pow(dsaShare, 3) : 0;
+let otherPower = Math.pow(otherShare, 3);
+
+let powerTotal = repPower + demPower + dsaPower + otherPower;
+
+let repSeats = Math.floor((repPower / powerTotal) * totalSeats);
+let demSeats = Math.floor((demPower / powerTotal) * totalSeats);
+let dsaSeats = Q.dsa_split ? Math.floor((libPower / powerTotal) * totalSeats) : 0;
+let otherSeats = totalSeats - repSeats - demSeats - dsaSeats;
+
+Q.rep_r = repSeats;
+Q.dem_r = demSeats;
+Q.dsa_r = dsaSeats;
+Q.other_r = otherSeats;
+
+// === 4. Track seat changes ===
+for (let party of Q.parties) {
+  let cur = Q[party + "_r"];
+  let old = Q["old_" + party + "_r"];
+  let change = cur - old;
+  Q["change_" + party + "_r"] = change;
+  Q["str_change_" + party + "_r"] = (change > 0 ? "+" : "") + change;
+  Q[party + "_r_disp"] = Q.use_decimals ? cur.toFixed(1) : cur;
+}
+
+// === 5. Largest party tracker ===
+Q.largest_party_r = "rep";
+if (Q.dem_r >= Q.rep_r && Q.dem_r >= Q.other_r && Q.dem_r >= Q.lib_r) Q.largest_party_r = "dem";
+if (Q.dsa_r >= Q.rep_r && Q.dsa_r >= Q.dem_r && Q.dsa_r >= Q.other_r) Q.largest_party_r = "dsa";
+if (Q.other_r >= Q.rep_r && Q.other_r >= Q.dem_r && Q.other_r >= Q.lib_r) Q.largest_party_r = "other";
+
+if (Q.dsa_split === 1) {
+    let dsaSeats = Q.dsa_r || 0;
+    let totalHouse = Q.rep_r + Q.dem_r + Q.dsa_r + Q.other_r;
+    let dsaPct = (libSeats / totalHouse) * 100;
+}
+
+// === 6. Majority display vars ===
+Q.republican_majority_r = Q.rep_r;
+Q.democrat_majority_r = Q.dem_r;
+Q.dsa_majority_r = Q.dsa_r;
+Q.other_majority_r = Q.other_r;
+
+// === 7. Record the result ===
+let result = { date: Q.year + "-" + Q.month };
+for (let party of Q.parties) {
+    result[party] = Q[party + "_r"];
+}
+Q.house_election_records = Q.house_election_records || [];
+Q.house_election_records.push(result);
+
+// === 8. Majority strength ===
+// Democrats need majority of all seats
+let totalHouse = Q.rep_r + Q.dem_r + Q.dsa_r + Q.other_r;
+let repPctHouse = (Q.rep_r / totalHouse) * 100;
+
+if (demPctHouse >= 66.7) {
+    Q.house_majority = 2;
+} else if (repPctHouse >= 50) {
+    Q.house_majority = 1;
+} else {
+    Q.house_majority = 0;
+}
+
+// === 9. Check if dem + dsa together form a working majority ===
+let demDsaPct = ((Q.dem_r + Q.dsa_r) / totalHouse) * 100;
+Q.dem_dsa_working_majority = demDsaPct >= 50 ? 1 : 0;
+
+on-display: {!
+  function drawChart() {
+    var chartData = [
+      {
+        id: "republicans",
+        seats: Math.round(Q.rep_r),
+        color: "#E3000F",
+        outline: "#E3000F"
+      },
+      {
+        id: "democrats",
+        seats: Math.round(Q.dem_r),
+        color: "#0015bc",
+        outline: "#0015BC"
+      },
+      {
+        id: "democratic_socialists",
+        seats: Math.round(Q.dsa_r),
+        color: "#DAA520",
+        outline: "#DAA520"
+      },
+      {
+        id: "others",
+        seats: Math.round(Q.other_r),
+        color: "#00cc00",
+        outline: "#a0a0a0"
+      }
+    ].filter(d => d.seats > 0);
+
+    var width = Math.min(500, document.getElementById('content').offsetWidth - 50);
+
+    var container = d3.select("#houseChart");
+    if (container.empty()) {
+      container = d3.select("#content").append("svg").attr("id", "houseChart");
+    }
+    container.attr("width", width)
+             .attr("height", width / 2)
+             .html("");
+
+    var parliament = d3.parliament().width(width).innerRadiusCoef(0.4);
+    container.data([chartData]).call(parliament);
+  }
+
+  if (!window.d3) {
+    var script = document.createElement('script');
+    script.src = 'https://d3js.org/d3.v7.min.js';
+    script.onload = function() {
+      var subscript = document.createElement('script');
+      subscript.src = 'https://cdn.jsdelivr.net/npm/d3-parliament@1.0.3/build/d3-parliament.min.js';
+      subscript.onload = drawChart;
+      document.head.appendChild(subscript);
+    };
+    document.head.appendChild(script);
+  } else if (!window.d3.parliament) {
+    var script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/d3-parliament@1.0.3/build/d3-parliament.min.js';
+    script.onload = drawChart;
+    document.head.appendChild(script);
+  } else {
+    drawChart();
+  }
+!}
+go-to: house_menu
+
+= House Election Results
+
+{!<svg id="houseChart" style="width 500px height 250px"> </svg>!}
+
+{!<table>!}
+{!<tr><td>Party</td><td>Seats</td><td>Change</td></tr>!}
+
+{!<tr><td><div class="box" style='background-color:#E3000F; outline: 2px solid;'> </div> !} <span style="color: #c00000;">**Republicans:**</span> {!</td><td>!} [+ rep_r_disp +] seats {!</td><td>!} [+ str_change_rep_r +] {!</td></tr>!}
+
+{!<tr><td><div class="box" style='background-color:#0015BC'> </div> !} <span style="color: #0015bc;">**Democrats**</span>: {!</td><td>!} [+ dem_r_disp +] seats {!</td><td>!} [+ str_change_dem_r +] {!</td></tr>!}
+
+[? if liberal_split = 1 : {!<tr><td><div class="box" style='background-color:#DAA520'> </div> !} <span style="color: #DAA520;">**Liberal Republicans**</span>: {!</td><td>!} [+ lib_r_disp +] seats {!</td><td>!} [+ str_change_lib_r +] {!</td></tr>!} ?]
+
+{!<tr><td><div class="box" style='background-color:#a0a0a0'> </div> !} Others: {!</td><td>!} [+ other_r_disp +] seats {!</td><td>!} [+ str_change_other_r +] {!</td></tr>!}
+{!</table>!}
+
+@house_menu
+
+- @house_simple_majority
+- @house_super_majority
+- @house_rep_lib_majority
+- @house_defeat
+- @house_lib_kingmaker
+- @house_tie
+
+@house_simple_majority
+title: **Democrats** gain a majority in the House
+subtitle: **Democrats**: [+ rep_r +] seats
+view-if: house_majority = 1
+on-arrival: speaker_election_needed = 1
+
+The **Democrats** have secured a majority in the House of Representatives.
+
+@house_super_majority
+title: **Democrats** secure a supermajority
+subtitle: **Democrats**: [+ rep_r +] seats
+view-if: house_majority = 3
+on-arrival: speaker_election_needed = 1
+
+With two-thirds of the House, **Democrats** now wield veto-proof power.
+
+@house_rep_lib_majority
+title: **Democrats** and **Democratic Socialists** hold a working majority
+subtitle: **Democratss**: [+ rep_r +] seats, **Democratic Socialists**: [+ dsa_r +] seats
+view-if: house_majority = 0 and dem_dsa_working_majority = 1 and dsa_split = 1
+on-arrival: speaker_election_needed = 1
+
+Neither party holds an outright majority, but **Democrats**</span> and <span style="color: #DAA520;">**Liberal Republicans**</span> together command enough seats to pass legislation if they can find common ground. Their cooperation will not come without a price.
+
+@house_defeat
+title: <span style="color: #c00000;">**Republicans**</span> lose the House
+subtitle: <span style="color: #c00000;">**Republicans**</span>: [+ rep_r +] seats
+view-if: house_majority = 0 and dem_dsa_working_majority = 0 and rep_r > rep_r
+on-arrival: speaker_election_needed = 1
+
+The <span style="color: #0015bc;">**Democrats**</span> have taken control of the House of Representatives.
+
+@house_lib_kingmaker
+title: <span style="color: #DAA520;">**Liberal Republicans**</span> hold the balance of power
+subtitle: <span style="color: #DAA520;">**Liberal Republicans**</span>: [+ lib_r +] seats
+view-if: house_majority = 0 and dem_dsa_working_majority = 0 and rep_r <= dem_r and dsa_split = 1
+on-arrival: speaker_election_needed = 1
+
+No party commands a majority. The <span style="color: #DAA520;">**Liberal Republicans**</span> find themselves in the position of kingmakers — their votes will determine whether Reconstruction legislation advances or stalls.
+
+@house_tie
+title: The House is tied!
+subtitle: Both parties are neck and neck
+view-if: rep_r = dem_r and house_majority = 0 and dem_dsa_working_majority = 0
+on-arrival: speaker_election_needed = 1
+
+A tied House will cause major legislative deadlock in the months ahead.
