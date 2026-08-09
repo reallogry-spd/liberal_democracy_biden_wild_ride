@@ -23,8 +23,4 @@ Maybe our numerous House campaigns will bring us some better news?
 - @house: The House Results
 
 @house
-on-arrival: house_majority = 1
-
-The House presents us with a much better situation. We have managed to steal 41 seats, giving us the majority in the lower house of Congress.
-
-Now comes the question of leadership.
+go-to: house_elections.scene.dry
