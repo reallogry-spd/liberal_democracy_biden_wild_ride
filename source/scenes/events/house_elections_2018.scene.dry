@@ -70,20 +70,7 @@ for (let state of Q.states) {
 // === 3. Allocate seats using cube law ===
 let totalVotes = repVotes + demVotes + libVotes + otherVotes;
 
-let totalSeats;
-if (Q.year == 1866) {
-    totalSeats = Q.house_total_seat_1866;
-} else if (Q.year == 1868) {
-    totalSeats = Q.house_total_seat_1868;
-} else if (Q.year == 1870) {
-    totalSeats = Q.house_total_seat_1870;
-} else if (Q.year == 1872) {
-    totalSeats = Q.house_total_seat_1872;
-} else if (Q.year == 1874) {
-    totalSeats = Q.house_total_seat_1874;
-} else {
-    totalSeats = Q.house_total_seat_1876;
-}
+totalSeats = 435
 
 let repShare = repVotes / totalVotes;
 let demShare = demVotes / totalVotes;
