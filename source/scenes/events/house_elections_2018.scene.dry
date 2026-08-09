@@ -4,7 +4,7 @@ view-if: year = 2018 and month = 11
 
 The House of Representatives Elections are to be held
 
-@continue: May we do our best...
+- @continue: May we do our best...
 
 @continue
 on-arrival: {!
