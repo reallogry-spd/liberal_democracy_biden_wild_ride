@@ -143,7 +143,6 @@ if (demPctHouse >= 66.7) {
 let demDsaPct = ((Q.dem_r + Q.dsa_r) / totalHouse) * 100;
 Q.dem_dsa_working_majority = demDsaPct >= 50 ? 1 : 0;
 
-!}
 on-display: {!
   function drawChart() {
     var chartData = [
