@@ -209,7 +209,6 @@ go-to: house_menu
 = House Election Results
 
 {!<svg id="houseChart" style="width: 500px; height: 250px"> </svg>!}
-
 {!<table>!}
 {!<tr><td>Party</td><td>Seats</td><td>Change</td></tr>!}
 
