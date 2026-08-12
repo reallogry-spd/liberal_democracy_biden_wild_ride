@@ -401,6 +401,81 @@ Q.finance_minister_party = 'Z';
 Q.agriculture_minister = 'Schiele';
 Q.agriculture_minister_party = 'DNVP';
 
+// === GEORGIA ===
+Q.GA_workers = 28974;
+Q.GA_workers_rep = 15;
+Q.GA_workers_dem = 75;
+Q.GA_workers_lib = 0;
+Q.GA_workers_other = 10;
+
+Q.GA_middle_class = 12262;
+Q.GA_middle_class_rep = 10;
+Q.GA_middle_class_dem = 80;
+Q.GA_middle_class_lib = 0;
+Q.GA_middle_class_other = 10;
+
+Q.GA_rural = 75964;
+Q.GA_rural_rep = 5;
+Q.GA_rural_dem = 90;
+Q.GA_rural_lib = 0;
+Q.GA_rural_other = 5;
+
+Q.GA_freemen = 230862;
+Q.GA_freemen_rep = 80;
+Q.GA_freemen_dem = 10;
+Q.GA_freemen_lib = 0;
+Q.GA_freemen_other = 10;
+
+Q.GA_immigrant_laborers = 11671;
+Q.GA_immigrant_laborers_rep = 20;
+Q.GA_immigrant_laborers_dem = 70;
+Q.GA_immigrant_laborers_lib = 0;
+Q.GA_immigrant_laborers_other = 10;
+
+Q.GA_unemployed = 206883;
+Q.GA_unemployed_rep = 15;
+Q.GA_unemployed_dem = 75;
+Q.GA_unemployed_lib = 0;
+Q.GA_unemployed_other = 10;
+
+// Election and economic history records
+Q.election_records = [];
+Q.party_support_records = [];
+Q.economic_records = [];
+
+// State of the government
+Q.president = "Lincoln";
+Q.president_party = "rep";
+Q.vice_president = "Johnson";
+Q.vice_president_party = "dem";
+Q.speaker = "Ryan";
+Q.speaker_party = "Rep";
+Q.sen_majority = 3;
+Q.house_majority = 3;
+Q.rep_majority = 1;
+Q.freedmens_bureau_active = 0;
+
+Q.reconstruction_support = 85;
+Q.Base_Support = 0;
+Q.ViolencePenalty = 0;
+Q.FatiguePenalty = 0;
+Q.PoliticalCostPenalty = 0;
+Q.reconstructionPlanActive = 0;
+
+Q.Candidate = "";
+Q.VPCandidate = "";
+Q.Winner_20 = "";
+Q.Winner_24 = "";
+
+Q.sect_state = 'Rex Tillerson';
+Q.sect_state_party = 'R';
+Q.attorney_general = 'Jeff Sessions';
+Q.attorney_general_party = 'R';
+Q.sect_def = 'James Mattis';
+Q.sect_def_party = 'R';
+Q.sect_treasury = 'Steven Mnuchin';
+Q.sect_treasury_party = 'R';
+
 // Events: what has occurred?
 Q.panzerkreuzer_seen = 0;
 Q.panzerkreuzer_funded = 0;
@@ -409,6 +484,9 @@ Q.unemployment_insurance_seen = 0;
 // unemployment insurance event is seen if the unemployment level is at least 4 more than the threshold...
 Q.unemployment_insurance_threshold = 10;
 Q.blutmai = 0;
+Q.pandemic_start = 0
+Q.pandemic_end = 0
+Q.vaccine = 0
 
 // have we reformed these institutions to be more democratic?
 Q.judicial_reform = 0;
