@@ -1,4 +1,4 @@
-// ALABAMA // 
+// ALABAMA
 Q.alabama_pop = 4891628
 Q.alabama_black = 0.26
 Q.alabama_hispanic = 0.043
@@ -9,7 +9,7 @@ Q.alabama_young = 0.223
 Q.alabama_old = 0.169
 Q.resistance_factor_al = 9
 
-// ALASKA //
+// ALASKA
 Q.alaska_pop = 736624
 Q.alaska_black = 0.037
 Q.alaska_hispanic = 0.077
@@ -20,7 +20,7 @@ Q.alaska_young = 0.221
 Q.alaska_old = 0.118
 Q.resistance_factor_ak: 8
   
-// ARIZONA //
+// ARIZONA
 Q.arizona_pop = 7164228
 Q.arizona_black = 0.051
 Q.arizona_hispanic = 0.317
