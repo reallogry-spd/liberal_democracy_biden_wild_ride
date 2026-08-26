@@ -1,6 +1,6 @@
 title: Voter Demographics by State
 new-page: true
-on-arrival: {!
+on-arrival: {
   Q.alabama_pop = 4891628;
   Q.alabama_black = 0.26
   Q.alabama_hispanic = 0.043
@@ -30,7 +30,7 @@ on-arrival: {!
   Q.arizona_young = 0.209
   Q.arizona_old = 0.166
   Q.resistance_factor = 4
-!}
+}
 
 // ARKANSAS 
 
