@@ -1,5 +1,8 @@
 title: Voter Demographics by State
 new-page: true
+tags: event
+view-if: senate_majority == 1
+max-visits: 1
 on-arrival: {!
 Q.alabama_pop = 4891628;
 Q.alabama_black = 0.26;
