@@ -28,6 +28,7 @@ Q.arizona_poverty = 0.14;
 Q.arizona_young = 0.209; 
 Q.arizona_old = 0.166; 
 Q.resistance_factor_az = 4;
+!}
 
 DEBUG
 
