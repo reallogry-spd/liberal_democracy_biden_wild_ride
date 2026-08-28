@@ -2,7 +2,6 @@ title: Voter Demographics by State
 new-page: true
 tags: event
 view-if: senate_majority == 1
-max-visits: 1
 on-arrival: {!
 Q.alabama_pop = 4891628;
 Q.alabama_black = 0.26;
@@ -32,6 +31,7 @@ Q.arizona_young = 0.209;
 Q.arizona_old = 0.166; 
 Q.resistance_factor_az = 4;
 !}
+max-visits: 1
 
 = Demographics
 
