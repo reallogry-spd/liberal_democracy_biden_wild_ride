@@ -7,36 +7,36 @@ priority: 1
 max-visits: 1
 on-arrival: {!
 // ALABAMA
-Q.alabama_pop = 4891628;
-Q.alabama_black = 0.26;
-Q.alabama_hispanic = 0.043;
-Q.alabama_urban = 0.59;
-Q.alabama_rural = 0.41;
-Q.alabama_low_income = 0.246;
-Q.alabama_young = 0.223;
-Q.alabama_old = 0.169; 
+Q.al_pop = 4891628;
+Q.al_black = 0.26;
+Q.al_hispanic = 0.043;
+Q.al_urban = 0.59;
+Q.al_rural = 0.41;
+Q.al_low_income = 0.246;
+Q.al_young = 0.223;
+Q.al_old = 0.169; 
 Q.resistance_factor_al = 9;
 
 // ALASKA
-Q.alaska_pop = 736624;
-Q.alaska_black = 0.037;
-Q.alaska_hispanic = 0.077;
-Q.alaska_urban = 0.833; 
-Q.alaska_rural = 0.167; 
-Q.alaska_low_income = 0.142; 
-Q.alaska_young = 0.221; 
-Q.alaska_old = 0.118;
+Q.ak = 736624;
+Q.ak_black = 0.037;
+Q.ak_hispanic = 0.077;
+Q.ak_urban = 0.833; 
+Q.ak_rural = 0.167; 
+Q.ak_low_income = 0.142; 
+Q.ak_young = 0.221; 
+Q.ak_old = 0.118;
 Q.resistance_factor_ak = 8; 
 
 // ARIZONA
-Q.arizona_pop = 7164228;
-Q.arizona_black = 0.051; 
-Q.arizona_hispanic = 0.317;
-Q.arizona_urban = 0.8471; 
-Q.arizona_rural = 0.153; 
-Q.arizona_low_income = 0.218; 
-Q.arizona_young = 0.209; 
-Q.arizona_old = 0.166; 
+Q.az_pop = 7164228;
+Q.az_black = 0.051; 
+Q.az_hispanic = 0.317;
+Q.az_urban = 0.8471; 
+Q.az_rural = 0.153; 
+Q.az_low_income = 0.218; 
+Q.az_young = 0.209; 
+Q.az = 0.166; 
 Q.resistance_factor_az = 4;
 !}
 
