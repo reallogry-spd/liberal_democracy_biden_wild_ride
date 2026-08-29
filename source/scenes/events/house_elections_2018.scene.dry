@@ -47,138 +47,138 @@ The House of Representatives Elections are to be held
 @continue
 on-arrival: {!
 
-// Save old seat values
-for (let party of Q.parties) {
-    Q["old_" + party + "_r"] = Q[party + "_r"] || 0;
-}
-
-// === 2. Calculate raw vote totals using blended support (20% local, 80% national) ===
-let repVotes = 0;
-let demVotes = 0;
-let libVotes = 0;
-let otherVotes = 0;
-
-for (let state of Q.states) {
-  for (let cls of Q.classes) {
-
-      let rep = Q[state + "_" + cls + "_rep"] || 0;
-      let dem = Q[state + "_" + cls + "_dem"] || 0;
-      let lib = Q[state + "_" + cls + "_lib"] || 0;
-      let other = Q[state + "_" + cls + "_other"] || 0;
-
-      let repMod = Q[cls + "_rep"] || 0;
-      let demMod = Q[cls + "_dem"] || 0;
-      let libMod = Q[cls + "_lib"] || 0;
-      let otherMod = Q[cls + "_other"] || 0;
-
-      let adjRep = 0.2 * rep + 0.8 * repMod;
-      let adjDem = 0.2 * dem + 0.8 * demMod;
-      let adjLib = Q.liberal_split ? (0.2 * lib + 0.8 * libMod) : 0;
-      let adjOther = 0.2 * other + 0.8 * otherMod;
-
-      let totalPct = adjRep + adjDem + adjLib + adjOther;
-      if (totalPct === 0) continue;
-
-      repVotes += pop * (adjRep / totalPct);
-      demVotes += pop * (adjDem / totalPct);
-      libVotes += pop * (adjLib / totalPct);
-      otherVotes += pop * (adjOther / totalPct);
-
-      if (Q.fifteenth == 0) {
-        repVotes *= 1.0025;
+    // Save old seat values
+    for (let party of Q.parties) {
+        Q["old_" + party + "_r"] = Q[party + "_r"] || 0;
+    }
+    
+    // === 2. Calculate raw vote totals using blended support (20% local, 80% national) ===
+    let repVotes = 0;
+    let demVotes = 0;
+    let libVotes = 0;
+    let otherVotes = 0;
+    
+    for (let state of Q.states) {
+      for (let cls of Q.classes) {
+    
+          let rep = Q[state + "_" + cls + "_rep"] || 0;
+          let dem = Q[state + "_" + cls + "_dem"] || 0;
+          let lib = Q[state + "_" + cls + "_lib"] || 0;
+          let other = Q[state + "_" + cls + "_other"] || 0;
+    
+          let repMod = Q[cls + "_rep"] || 0;
+          let demMod = Q[cls + "_dem"] || 0;
+          let libMod = Q[cls + "_lib"] || 0;
+          let otherMod = Q[cls + "_other"] || 0;
+    
+          let adjRep = 0.2 * rep + 0.8 * repMod;
+          let adjDem = 0.2 * dem + 0.8 * demMod;
+          let adjLib = Q.liberal_split ? (0.2 * lib + 0.8 * libMod) : 0;
+          let adjOther = 0.2 * other + 0.8 * otherMod;
+    
+          let totalPct = adjRep + adjDem + adjLib + adjOther;
+          if (totalPct === 0) continue;
+    
+          repVotes += pop * (adjRep / totalPct);
+          demVotes += pop * (adjDem / totalPct);
+          libVotes += pop * (adjLib / totalPct);
+          otherVotes += pop * (adjOther / totalPct);
+    
+          if (Q.fifteenth == 0) {
+            repVotes *= 1.0025;
+          }
+        }
       }
     }
-  }
-}
-
-// === 3. Allocate seats using cube law ===
-let totalVotes = repVotes + demVotes + libVotes + otherVotes;
-
-totalSeats = 435
-
-let repShare = repVotes / totalVotes;
-let demShare = demVotes / totalVotes;
-let libShare = libVotes / totalVotes;
-let otherShare = otherVotes / totalVotes;
-
-let repPower = Math.pow(repShare, 3);
-let demPower = Math.pow(demShare, 3);
-let libPower = Q.liberal_split ? Math.pow(libShare, 3) : 0;
-let otherPower = Math.pow(otherShare, 3);
-
-let powerTotal = repPower + demPower + libPower + otherPower;
-
-let repSeats = Math.floor((repPower / powerTotal) * totalSeats);
-let demSeats = Math.floor((demPower / powerTotal) * totalSeats);
-let libSeats = Q.liberal_split ? Math.floor((libPower / powerTotal) * totalSeats) : 0;
-let otherSeats = totalSeats - repSeats - demSeats - libSeats;
-
-Q.rep_r = repSeats;
-Q.dem_r = demSeats;
-Q.lib_r = libSeats;
-Q.other_r = otherSeats;
-
-// === 4. Track seat changes ===
-for (let party of Q.parties) {
-  let cur = Q[party + "_r"];
-  let old = Q["old_" + party + "_r"];
-  let change = cur - old;
-  Q["change_" + party + "_r"] = change;
-  Q["str_change_" + party + "_r"] = (change > 0 ? "+" : "") + change;
-  Q[party + "_r_disp"] = Q.use_decimals ? cur.toFixed(1) : cur;
-}
-
-// === 5. Largest party tracker ===
-Q.largest_party_r = "rep";
-if (Q.dem_r >= Q.rep_r && Q.dem_r >= Q.other_r && Q.dem_r >= Q.lib_r) Q.largest_party_r = "dem";
-if (Q.lib_r >= Q.rep_r && Q.lib_r >= Q.dem_r && Q.lib_r >= Q.other_r) Q.largest_party_r = "lib";
-if (Q.other_r >= Q.rep_r && Q.other_r >= Q.dem_r && Q.other_r >= Q.lib_r) Q.largest_party_r = "other";
-
-if (Q.liberal_split === 1 && Q.liberal_reunion_seen !== 1) {
-    let libSeats = Q.lib_r || 0;
-    let totalHouse = Q.rep_r + Q.dem_r + Q.lib_r + Q.other_r;
-    let libPct = (libSeats / totalHouse) * 100;
- 
-    // They've lost balance of power (can't kingmake) AND dropped below 8% of seats
-    // Adjust 8% threshold to taste. lower = harder to trigger reunion
-    let libCanKingmake = Q.rep_lib_working_majority === 0 && libSeats > 0;
-    let libCollapsed = libPct < 8;
- 
-    if (libCollapsed && !libCanKingmake) {
-        Q.liberal_reunion_triggered = 1;
+    
+    // === 3. Allocate seats using cube law ===
+    let totalVotes = repVotes + demVotes + libVotes + otherVotes;
+    
+    totalSeats = 435
+    
+    let repShare = repVotes / totalVotes;
+    let demShare = demVotes / totalVotes;
+    let libShare = libVotes / totalVotes;
+    let otherShare = otherVotes / totalVotes;
+    
+    let repPower = Math.pow(repShare, 3);
+    let demPower = Math.pow(demShare, 3);
+    let libPower = Q.liberal_split ? Math.pow(libShare, 3) : 0;
+    let otherPower = Math.pow(otherShare, 3);
+    
+    let powerTotal = repPower + demPower + libPower + otherPower;
+    
+    let repSeats = Math.floor((repPower / powerTotal) * totalSeats);
+    let demSeats = Math.floor((demPower / powerTotal) * totalSeats);
+    let libSeats = Q.liberal_split ? Math.floor((libPower / powerTotal) * totalSeats) : 0;
+    let otherSeats = totalSeats - repSeats - demSeats - libSeats;
+    
+    Q.rep_r = repSeats;
+    Q.dem_r = demSeats;
+    Q.lib_r = libSeats;
+    Q.other_r = otherSeats;
+    
+    // === 4. Track seat changes ===
+    for (let party of Q.parties) {
+      let cur = Q[party + "_r"];
+      let old = Q["old_" + party + "_r"];
+      let change = cur - old;
+      Q["change_" + party + "_r"] = change;
+      Q["str_change_" + party + "_r"] = (change > 0 ? "+" : "") + change;
+      Q[party + "_r_disp"] = Q.use_decimals ? cur.toFixed(1) : cur;
     }
-}
-
-// === 6. Majority display vars ===
-Q.republican_majority_r = Q.rep_r;
-Q.democrat_majority_r = Q.dem_r;
-Q.liberal_majority_r = Q.lib_r;
-Q.other_majority_r = Q.other_r;
-
-// === 7. Record the result ===
-let result = { date: Q.year + "-" + Q.month };
-for (let party of Q.parties) {
-    result[party] = Q[party + "_r"];
-}
-Q.house_election_records = Q.house_election_records || [];
-Q.house_election_records.push(result);
-
-// === 8. Majority strength ===
-// Republicans need majority of all seats including lib
-let totalHouse = Q.rep_r + Q.dem_r + Q.lib_r + Q.other_r;
-let repPctHouse = (Q.rep_r / totalHouse) * 100;
-
-if (repPctHouse >= 66.7) {
-    Q.house_majority = 3;
-} else if (repPctHouse >= 50) {
-    Q.house_majority = 2;
-} else {
-    Q.house_majority = 0;
-}
-
-// === 9. Check if rep + lib together form a working majority ===
-let repLibPct = ((Q.rep_r + Q.lib_r) / totalHouse) * 100;
-Q.rep_lib_working_majority = repLibPct >= 50 ? 1 : 0;
+    
+    // === 5. Largest party tracker ===
+    Q.largest_party_r = "rep";
+    if (Q.dem_r >= Q.rep_r && Q.dem_r >= Q.other_r && Q.dem_r >= Q.lib_r) Q.largest_party_r = "dem";
+    if (Q.lib_r >= Q.rep_r && Q.lib_r >= Q.dem_r && Q.lib_r >= Q.other_r) Q.largest_party_r = "lib";
+    if (Q.other_r >= Q.rep_r && Q.other_r >= Q.dem_r && Q.other_r >= Q.lib_r) Q.largest_party_r = "other";
+    
+    if (Q.liberal_split === 1 && Q.liberal_reunion_seen !== 1) {
+        let libSeats = Q.lib_r || 0;
+        let totalHouse = Q.rep_r + Q.dem_r + Q.lib_r + Q.other_r;
+        let libPct = (libSeats / totalHouse) * 100;
+     
+        // They've lost balance of power (can't kingmake) AND dropped below 8% of seats
+        // Adjust 8% threshold to taste. lower = harder to trigger reunion
+        let libCanKingmake = Q.rep_lib_working_majority === 0 && libSeats > 0;
+        let libCollapsed = libPct < 8;
+     
+        if (libCollapsed && !libCanKingmake) {
+            Q.liberal_reunion_triggered = 1;
+        }
+    }
+    
+    // === 6. Majority display vars ===
+    Q.republican_majority_r = Q.rep_r;
+    Q.democrat_majority_r = Q.dem_r;
+    Q.liberal_majority_r = Q.lib_r;
+    Q.other_majority_r = Q.other_r;
+    
+    // === 7. Record the result ===
+    let result = { date: Q.year + "-" + Q.month };
+    for (let party of Q.parties) {
+        result[party] = Q[party + "_r"];
+    }
+    Q.house_election_records = Q.house_election_records || [];
+    Q.house_election_records.push(result);
+    
+    // === 8. Majority strength ===
+    // Republicans need majority of all seats including lib
+    let totalHouse = Q.rep_r + Q.dem_r + Q.lib_r + Q.other_r;
+    let repPctHouse = (Q.rep_r / totalHouse) * 100;
+    
+    if (repPctHouse >= 66.7) {
+        Q.house_majority = 3;
+    } else if (repPctHouse >= 50) {
+        Q.house_majority = 2;
+    } else {
+        Q.house_majority = 0;
+    }
+    
+    // === 9. Check if rep + lib together form a working majority ===
+    let repLibPct = ((Q.rep_r + Q.lib_r) / totalHouse) * 100;
+    Q.rep_lib_working_majority = repLibPct >= 50 ? 1 : 0;
 !}
 on-display: {!
   function drawChart() {
