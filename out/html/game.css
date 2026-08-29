@@ -1,9 +1,9 @@
 body {
-  --bg-color: #92e2fc;
-  --border-color: #000;
-  --content-bg-color: #277991;
-  --text-color: #c0c914;
-  --link-color: #900;
+  --bg-color: #ffffff;
+  --border-color: ##1d2a66;
+  --content-bg-color: #1d2a66;
+  --text-color: #d5de8a;
+  --link-color: #fff200;
   --link-hover-color: rgba(0, 0, 0, 0.05);
   --unavailable-bg-color: rgba(0, 0, 0, 0.1);
   --unavailable-color: #999;
