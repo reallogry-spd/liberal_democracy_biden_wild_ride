@@ -179,7 +179,6 @@ if (repPctHouse >= 66.7) {
 // === 9. Check if rep + lib together form a working majority ===
 let repLibPct = ((Q.rep_r + Q.lib_r) / totalHouse) * 100;
 Q.rep_lib_working_majority = repLibPct >= 50 ? 1 : 0;
-
 !}
 on-display: {!
   function drawChart() {
