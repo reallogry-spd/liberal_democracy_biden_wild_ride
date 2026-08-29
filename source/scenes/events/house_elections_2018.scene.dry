@@ -5,6 +5,40 @@ new-page: true
 view-if: year = 2018 and month = 11
 priority: 1
 max-visits: 1
+on-arrival: {!
+// ALABAMA
+Q.alabama_pop = 4891628;
+Q.alabama_black = 0.26;
+Q.alabama_hispanic = 0.043;
+Q.alabama_urban = 0.59;
+Q.alabama_rural = 0.41;
+Q.alabama_low_income = 0.246;
+Q.alabama_young = 0.223;
+Q.alabama_old = 0.169; 
+Q.resistance_factor_al = 9;
+
+// ALASKA
+Q.alaska_pop = 736624;
+Q.alaska_black = 0.037;
+Q.alaska_hispanic = 0.077;
+Q.alaska_urban = 0.833; 
+Q.alaska_rural = 0.167; 
+Q.alaska_low_income = 0.142; 
+Q.alaska_young = 0.221; 
+Q.alaska_old = 0.118;
+Q.resistance_factor_ak = 8; 
+
+// ARIZONA
+Q.arizona_pop = 7164228;
+Q.arizona_black = 0.051; 
+Q.arizona_hispanic = 0.317;
+Q.arizona_urban = 0.8471; 
+Q.arizona_rural = 0.153; 
+Q.arizona_low_income = 0.218; 
+Q.arizona_young = 0.209; 
+Q.arizona_old = 0.166; 
+Q.resistance_factor_az = 4;
+!}
 
 The House of Representatives Elections are to be held
 
@@ -26,16 +60,6 @@ let otherVotes = 0;
 
 for (let state of Q.states) {
   for (let cls of Q.classes) {
-
-    if (cls === "freemen" && Q.fifthteen == 0){
-      // skip freemen if 15th amendment not passed
-    }
-    else {
-      let pop = Q[state + "_" + cls] || 0;
-
-      if (cls === "freemen") {
-        pop = pop * (Q.freedmen_turnout / 100);
-      }
 
       let rep = Q[state + "_" + cls + "_rep"] || 0;
       let dem = Q[state + "_" + cls + "_dem"] || 0;
