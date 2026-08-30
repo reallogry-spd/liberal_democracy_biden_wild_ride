@@ -111,8 +111,8 @@ on-arrival: {!
     let result = { date: Q.year + "-" + Q.month };
  //   for (let party of Q.parties) {
  //       result[party] = Q[party + "_r"];
-    }
-  ///  Q.house_election_records = Q.house_election_records || [];
+//    }
+  //  Q.house_election_records = Q.house_election_records || [];
   //  Q.house_election_records.push(result);
     
     // === 8. Majority strength ===
