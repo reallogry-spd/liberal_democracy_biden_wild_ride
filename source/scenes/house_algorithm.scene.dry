@@ -13,7 +13,7 @@ for (let state of Q.states) {
   for (let cls of Q.classes) {
     let pop = Q[state + "_" + cls] || 0;
 
-    let stateRes = Q[("resistance_factor_" + state) * (("resistance_factor_" + state)/105) +0.90)];
+    let stateRes = Q[(("resistance_factor_" + state) * (("resistance_factor_" + state)/105) + 0.90)];
 
     // support
     let rep = Q[(cls + "_gop") * pop] || 0;
