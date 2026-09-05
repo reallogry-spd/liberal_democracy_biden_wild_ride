@@ -173,6 +173,7 @@ Q.reichswehr_militancy = 5;
 Q.reichswehr_loyalty = 0.2;
 
 // The state of the country
+// vestigial
 
 // popular opinion
 // national ideology - on a binary scale
