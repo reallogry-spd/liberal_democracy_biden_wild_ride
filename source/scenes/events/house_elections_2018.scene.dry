@@ -55,11 +55,12 @@ on-arrival: {!
         for (let cls of Q.classes) {
             let pop = Q[state + "_" + cls] || 0;
         
-            let stateRes = Q[(("resistance_factor_" + state) * (("resistance_factor_" + state)/105) + 0.90)];
+            let baseRes = Q["resistance_factor_" + state];
+            let stateRes = baseRes * (baseRes / 105) + 0.90;
         
             // support
-            let rep = Q[(cls + "_gop") * pop] || 0;
-            let dem = Q[(cls + "_dem") * pop] || 0;
+            let rep = (Q[cls + "_gop"] || 0) * pop;
+            let dem = (Q[cls + "_dem"] || 0) * pop;
         
             let adjDem = dem/stateRes;
             let adjRep = rep;
