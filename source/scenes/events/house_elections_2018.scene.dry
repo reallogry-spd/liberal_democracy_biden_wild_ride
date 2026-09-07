@@ -74,7 +74,7 @@ on-arrival: {!
     // === 3. Allocate seats using cube law ===
     let totalVotes = repVotes + demVotes
     
-    totalSeats = 435
+    let totalSeats = 435
     
     let repShare = repVotes / totalVotes;
     let demShare = demVotes / totalVotes;
