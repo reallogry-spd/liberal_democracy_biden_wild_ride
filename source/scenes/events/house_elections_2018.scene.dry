@@ -18,7 +18,7 @@ Q.al_old = 0.169;
 Q.resistance_factor_al = 9;
 
 // ALASKA
-Q.ak = 736624;
+Q.ak_pop = 736624;
 Q.ak_black = 0.037;
 Q.ak_hispanic = 0.077;
 Q.ak_urban = 0.833; 
@@ -36,7 +36,7 @@ Q.az_urban = 0.8471;
 Q.az_rural = 0.153; 
 Q.az_low_income = 0.218; 
 Q.az_young = 0.209; 
-Q.az = 0.166; 
+Q.az_old = 0.166; 
 Q.resistance_factor_az = 4;
 !}
 
