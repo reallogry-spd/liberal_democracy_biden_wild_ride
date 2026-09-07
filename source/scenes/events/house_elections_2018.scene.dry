@@ -245,7 +245,7 @@ Neither party holds an outright majority, but <span style="color: #c00000;">**Re
 @house_defeat
 title: <span style="color: #c00000;">**Republicans**</span> lose the House
 subtitle: <span style="color: #c00000;">**Republicans**</span>: [+ rep_r +] seats
-view-if: house_majority = 0 and rep_lib_working_majority = 0 and dem_r > rep_r
+view-if: house_majority = 0 and rep_lib_working_majority = 0 and rep_r > dem_r
 on-arrival: speaker_election_needed = 1
 
 The <span style="color: #0015bc;">**Democrats**</span> have taken control of the House of Representatives.
