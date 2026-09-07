@@ -50,27 +50,26 @@ on-arrival: {!
     // === 2. Calculate raw vote totals using blended support (20% local, 80% national) ===
     let repVotes = 0;
     let demVotes = 0;
-    
-    for (let state of Q.states) {
-        for (let cls of Q.classes) {
-            let pop = Q[state + "_" + cls] || 0;
-        
-            let baseRes = Q["resistance_factor_" + state];
-            let stateRes = baseRes * (baseRes / 105) + 0.90;
-        
-            // support
-            let rep = (Q[cls + "_gop"] || 0) * pop;
-            let dem = (Q[cls + "_dem"] || 0) * pop;
-        
-            let adjDem = dem/stateRes;
-            let adjRep = rep;
-        
-            let totalPct = adjRep + adjDem;
-        
-            repVotes += pop * (adjRep / totalPct);
-            demVotes += pop * (adjDem / totalPct);
-          }
-        }
+
+    for (let i = 0; i < Q.states.length; i++) {
+    let state = Q.states[i];
+    for (let j = 0; j < Q.classes.length; j++) {
+        let cls = Q.classes[j];
+
+        let pop = Q[state + "_" + cls] || 0;
+        let baseRes = Q["resistance_factor_" + state];
+        let stateRes = baseRes * (baseRes / 105) + 0.90;
+        let rep = (Q[cls + "_gop"] || 0) * pop;
+        let dem = (Q[cls + "_dem"] || 0) * pop;
+        let adjDem = dem / stateRes;
+        let adjRep = rep;
+        let totalPct = adjRep + adjDem;
+
+        repVotes += pop * (adjRep / totalPct);
+        demVotes += pop * (adjDem / totalPct);
+    }
+}
+
     // === 3. Allocate seats using cube law ===
     let totalVotes = repVotes + demVotes
     
