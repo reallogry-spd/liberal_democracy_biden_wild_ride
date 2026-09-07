@@ -210,6 +210,27 @@ Q.budget = 4;
 Q.classes = ['black', 'hispanic', 'urban', 'rural', 'low_income', 'young', 'old']
 Q.states = ['al', 'ak', 'az']
 
+Q.black_dem = 0.50
+Q.black_gop = 0.50
+
+Q.hispanic_dem = 0.50
+Q.hispanic_gop = 0.50
+
+Q.urban_dem = 0.50
+Q.urban_gop = 0.50
+
+Q.rural_dem = 0.50
+Q.rural_gop = 0.50
+
+Q.low_income_dem = 0.50
+Q.low_income_gop = 0.50
+
+Q.young_dem = 0.50
+Q.young_gop = 0.50
+
+Q.old_dem = 0.50
+Q.old_gop = 0.50
+
 // unemployment: 1929 - 13.3, 1930 - 22.7, 1931 - 34.3, 1932 - 43.8 (same source as above)
 
 // income for industrial workers in reichsmarks/year - 1928 = 1600 Reichsmarks/year; 1931 = 1440 Reichsmarks/year; 1933 = 1138 Reichsmarks/year - source: https://babel.hathitrust.org/cgi/pt?id=uiug.30112104147985&seq=50
