@@ -119,11 +119,11 @@ on-arrival: {!
     // === 8. Majority strength ===
     // Republicans need majority of all seats including lib
     let totalHouse = Q.rep_r + Q.dem_r;
-    let repPctHouse = (Q.dem_r / totalHouse) * 100;
+    let demPctHouse = (Q.dem_r / totalHouse) * 100;
     
-    if (repPctHouse >= 66.7) {
+    if (demPctHouse >= 66.7) {
         Q.house_majority = 3;
-    } else if (repPctHouse >= 50) {
+    } else if (demPctHouse >= 50) {
         Q.house_majority = 2;
     } else {
         Q.house_majority = 0;
