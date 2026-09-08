@@ -263,4 +263,4 @@ subtitle: Both parties are neck and neck
 view-if: rep_r = dem_r and house_majority = 0 and rep_lib_working_majority = 0
 on-arrival: speaker_election_needed = 1
 
-A tied House will cause major legislative deadlock in the months ahead.
+Infor: [+ rep_r +] and [+ dem_r +]
