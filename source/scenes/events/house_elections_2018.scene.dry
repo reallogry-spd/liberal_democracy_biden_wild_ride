@@ -56,7 +56,9 @@ on-arrival: {!
     for (let j = 0; j < Q.classes.length; j++) {
         let cls = Q.classes[j];
 
-        let pop = Q[state + "_" + cls] || 0;
+        let popShare = Q[state + "_" + cls] || 0;
+        let statePop = Q[state + "_pop"] || 0;
+        let pop = statePop * popShare;
         let baseRes = Q["resistance_factor_" + state];
         let stateRes = baseRes * (baseRes / 105) + 0.90;
         let rep = (Q[cls + "_gop"] || 0) * pop;
