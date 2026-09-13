@@ -207,29 +207,71 @@ Q.capital_strike_progress = 0;
 Q.budget = 4;
 
 // Proportion of different social groups
-Q.classes = ['black', 'hispanic', 'urban', 'rural', 'low_income', 'young', 'old']
+Q.classes = ['upper_middle_class', 'lower_middle_class', 'working_poor', 'middle_class']
 Q.states = ['al', 'ak', 'az']
 
-Q.black_dem = 0.50
-Q.black_gop = 0.50
+Q.upper_middle_class_dem = 0.50
+Q.upper_middle_class_gop = 0.50
 
-Q.hispanic_dem = 0.50
-Q.hispanic_gop = 0.50
+Q.lower_middle_class_dem = 0.50
+Q.lower_middle_class_gop = 0.50
 
-Q.urban_dem = 0.50
-Q.urban_gop = 0.50
+Q.working_poor_dem = 0.50
+Q.working_poor_gop = 0.50
 
-Q.rural_dem = 0.50
-Q.rural_gop = 0.50
+Q.middle_class_dem = 0.50
+Q.middle_class_gop = 0.50
 
-Q.low_income_dem = 0.50
-Q.low_income_gop = 0.50
+// ALABAMA
+Q.al_upper_middle_class = 100
+Q.al_upper_middle_class_dem = 52
+Q.al_upper_middle_class_rep = 48
 
-Q.young_dem = 0.50
-Q.young_gop = 0.50
+Q.al_lower_middle_class = 100
+Q.al_lower_middle_class_dem = 44
+Q.al_lower_middle_class_rep = 56
 
-Q.old_dem = 0.50
-Q.old_gop = 0.50
+Q.al_working_poor = 100
+Q.al_working_poor_dem = 32
+Q.al_working_poor_rep = 68
+
+Q.al_middle_class = 100
+Q.al_middle_class_dem = 49
+Q.al_middle_class_rep = 51
+
+// ALASKA
+Q.ak_upper_middle_class = 100
+Q.ak_upper_middle_class_dem = 52
+Q.ak_upper_middle_class_rep = 48
+
+Q.ak_lower_middle_class = 100
+Q.ak_lower_middle_class_dem = 44
+Q.ak_lower_middle_class_rep = 56
+
+Q.ak_working_poor = 100
+Q.ak_working_poor_dem = 32
+Q.ak_working_poor_rep = 68
+
+Q.ak_middle_class = 100
+Q.ak_middle_class_dem = 49
+Q.ak_middle_class_rep = 51
+
+// ARIZONA
+Q.az_upper_middle_class = 100
+Q.az_upper_middle_class_dem = 52
+Q.az_upper_middle_class_rep = 48
+
+Q.az_lower_middle_class = 100
+Q.az_lower_middle_class_dem = 44
+Q.az_lower_middle_class_rep = 56
+
+Q.az_working_poor = 100
+Q.az_working_poor_dem = 32
+Q.az_working_poor_rep = 68
+
+Q.az_middle_class = 100
+Q.az_middle_class_dem = 49
+Q.az_middle_class_rep = 51
 
 // unemployment: 1929 - 13.3, 1930 - 22.7, 1931 - 34.3, 1932 - 43.8 (same source as above)
 
