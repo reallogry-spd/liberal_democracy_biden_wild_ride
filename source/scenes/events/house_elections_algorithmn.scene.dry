@@ -12,11 +12,6 @@ The House elections are to be held now.
 @House_election_algorithm
 on-arrival: {!
 
-// Save old seat values
-for (let party of Q.parties) {
-    Q["old_" + party + "_r"] = Q[party + "_r"] || 0;
-}
-
 // === 2. Calculate raw vote totals using blended support (20% local, 80% national) ===
 let repVotes = 0;
 let demVotes = 0;
@@ -46,7 +41,6 @@ for (let state of Q.states) {
 // === 3. Allocate seats using cube law ===
 let totalVotes = repVotes + demVotes;
 
-let totalSeats;
 totalSeats = 435
 
 let repShare = repVotes / totalVotes;
