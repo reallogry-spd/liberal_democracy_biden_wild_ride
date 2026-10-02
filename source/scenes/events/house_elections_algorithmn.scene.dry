@@ -18,6 +18,7 @@ let demVotes = 0;
 
 for (let state of Q.states) {
   for (let cls of Q.classes) {
+      let pop = Q[state + "_" + cls] || 0;
 
       let rep = Q[state + "_" + cls + "_rep"] || 0;
       let dem = Q[state + "_" + cls + "_dem"] || 0;
@@ -29,7 +30,6 @@ for (let state of Q.states) {
       let adjDem = 0.2 * dem + 0.8 * demMod;
 
       let totalPct = adjRep + adjDem;
-      if (totalPct === 0) continue;
 
       repVotes += pop * (adjRep / totalPct);
       demVotes += pop * (adjDem / totalPct);
