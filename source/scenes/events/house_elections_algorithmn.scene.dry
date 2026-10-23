@@ -7,9 +7,9 @@ view-if: (year = 2018) and (month = 11)
 
 The House elections are to be held now.
 
-- @House_election_algorithm: May we do our best...
+- @house_election_algorithm: May we do our best...
 
-@House_election_algorithm
+@house_election_algorithm
 on-arrival: {!
 
 // === 2. Calculate raw vote totals using blended support (20% local, 80% national) ===
