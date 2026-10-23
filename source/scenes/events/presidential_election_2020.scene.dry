@@ -6,7 +6,6 @@ max-visits: 1
 new-page: true
 on-arrival: biden_campaign = 0; hitler_support_hindenburg = 0; presidential_election_seen = 1; gop_candidate = "Trump" if trump_impeached == 0 else gop_candidate = "Pence";
 tags: event
-go-to: election_algorithm
 set-jump: pres_election
 face-image: img/hindenburg_election.jpg
 
@@ -398,7 +397,6 @@ We have switched our support to Hindenburg.
 - @round2_vote: Let the second round voting begin.
 
 @round2_vote
-go-to: election_algorithm
 set-jump: post_election
 
 @round2_results
