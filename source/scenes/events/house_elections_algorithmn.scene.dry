@@ -30,7 +30,7 @@ for (let cls of Q.classes) {
     repVotes += pop * (adjRep / totalPct);
     demVotes += pop * (adjDem / totalPct);
 
-    }
+    
   }
 }
 
