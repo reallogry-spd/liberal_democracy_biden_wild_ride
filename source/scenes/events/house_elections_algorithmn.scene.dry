@@ -55,7 +55,9 @@ Q.dem_r = demSeats;
 
 // === 5. Largest party tracker ===
 Q.largest_party_r = "rep";
-if (Q.dem_r >= Q.rep_r) Q.largest_party_r = "dem";
+if (Q.dem_r >= Q.rep_r) {
+    Q.largest_party_r = "dem";
+}
 
 // === 6. Majority display vars ===
 Q.republican_majority_r = Q.rep_r;
