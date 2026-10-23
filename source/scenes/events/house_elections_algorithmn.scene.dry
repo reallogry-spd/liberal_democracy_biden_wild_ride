@@ -30,8 +30,6 @@ for (let cls of Q.classes) {
     repVotes += pop * (adjRep / totalPct);
     demVotes += pop * (adjDem / totalPct);
 
-    
-  }
 }
 
 // === 3. Allocate seats using cube law ===
