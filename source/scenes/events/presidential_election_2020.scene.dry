@@ -32,8 +32,6 @@ subtitle: This is the default option.
 
 Despite his known reactionary nature, Hindenburg has at least been keeping the Nazis at bay. Thus, we must support him.
 
-- @final_election: The final vote...
-
 @support_braun
 subtitle: This will cost us 2 resources.
 choose-if: resources >= 2
@@ -61,14 +59,11 @@ on-arrival: spd_support_thalmann = 1; reformist_dissent += 15; center_dissent +=
 
 Fine. We have thrown our support to Chairman Thälmann of the KPD.
 
-- @final_election: The final vote...
-
 @braun_campaign
 
 - @convince_z: Convince the Center Party.
 - @convince_kpd: Convince the Communists.
 - @convince_liberals: Convince the remaining liberals, wherever they are.
-- @final_election: The final vote...
 
 @convince_z
 choose-if: spd_votes >= z_votes
@@ -162,13 +157,6 @@ on-arrival: dvp_support_braun = 0
 go-to: braun_campaign
 
 We failed to convince the DVP to support Braun.
-
-
-
-@final_election
-on-arrival: election_round = 0
-go-to: election_algorithm
-set-jump: post_election
 
 
 @post_election
