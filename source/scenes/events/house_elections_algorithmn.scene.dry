@@ -19,8 +19,8 @@ let demVotes = 0;
 for (let cls of Q.classes) {
     let pop = Q["nat_" + cls];
 
-    let repMod = Q[cls + "_rep"];
-    let demMod = Q[cls + "_dem"];
+    let repMod = Q["nat_" + cls + "_rep"];
+    let demMod = Q["nat_" + cls + "_dem"];
 
     let adjRep = repMod;
     let adjDem = demMod;
