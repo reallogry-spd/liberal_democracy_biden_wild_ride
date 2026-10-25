@@ -3,8 +3,8 @@ body {
   --border-color: #000;
   --content-bg-color: #f3f3f3;
   --text-color: #431;
-  --link-color: #4287f5;
-  --link-hover-color: rgba(18, 84, 134, 0.3);
+  --link-color: #2f63de;
+  --link-hover-color: rgba(18, 84, 200, 0.4);
   --unavailable-bg-color: rgba(0, 0, 0, 0.1;
   --unavailable-color: #999;
   --tab-bg-color: #dedede;
