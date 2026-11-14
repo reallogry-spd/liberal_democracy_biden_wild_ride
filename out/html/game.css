@@ -1,10 +1,10 @@
 body {
-  --bg-color: #ffffff;
-  --border-color: ##1d2a66;
-  --content-bg-color: #1d2a66;
-  --text-color: #d5de8a;
-  --link-color: #fff200;
-  --link-hover-color: rgba(0, 0, 0, 0.05);
+  --bg-color: #f3f3e3;
+  --border-color: #000;
+  --content-bg-color: #f3f3f3;
+  --text-color: #431;
+  --link-color: #0b155e;
+  --link-hover-color: rgba(0, 75, 255, 0.31);
   --unavailable-bg-color: rgba(0, 0, 0, 0.1);
   --unavailable-color: #999;
   --tab-bg-color: #dedede;
